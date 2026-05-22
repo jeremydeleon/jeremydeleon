@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>jeremy de leon</title>
+  <title>jdl</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Suisse+Int%27l:wght@300;400&display=swap" rel="stylesheet">
   <!-- fallback if Suisse isn't available -->
@@ -67,10 +67,18 @@
       font-family: var(--sans);
       font-size: 13px;
       font-weight: 400;
-      color: var(--white);
+      color: var(--black);
+      background: var(--white);
       text-decoration: none;
-      letter-spacing: 0.01em;
-      opacity: 0.9;
+      letter-spacing: 0.04em;
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-logo:hover {
+      background: var(--accent2);
+      color: var(--black);
     }
 
     .nav-links {
@@ -113,7 +121,7 @@
       color: var(--dim);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2.5rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -286,9 +294,31 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      grid-template-columns: 1fr 280px 1fr;
+      gap: 4rem;
       align-items: start;
+    }
+
+    .about-portrait {
+      position: sticky;
+      top: 6rem;
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+    }
+
+    .about-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.4s;
+    }
+
+    .about-portrait:hover img {
+      filter: grayscale(0%);
     }
 
     .about-statement {
@@ -725,7 +755,8 @@
       .nav-links { gap: 1.5rem; }
       #hero { padding: 0 1.5rem 3.5rem; }
       .section { padding: 4rem 1.5rem; }
-      .about-grid, .fc-top, .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-portrait { position: static; aspect-ratio: 4/3; max-height: 320px; }
       .skills-list { grid-template-columns: 1fr 1fr; }
       .fc-bottom { grid-template-columns: 1fr; }
       .fc-contrib { border-right: none; border-bottom: 1px solid var(--border); }
@@ -779,7 +810,7 @@
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2026</span>
-            <span class="proj-name">ebot bio toolhead exchange</span>
+            <span class="proj-name">ebot bio — ai benchtop robot</span>
           </div>
           <div class="proj-row-right">
             <span class="proj-type">Research · Di Carlo Lab</span>
@@ -794,7 +825,7 @@
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2025</span>
-            <span class="proj-name">asme bruin bb-8 arm</span>
+            <span class="proj-name">bruin bb-8</span>
           </div>
           <div class="proj-row-right">
             <span class="proj-type">Mechanical Design</span>
@@ -809,7 +840,7 @@
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2026</span>
-            <span class="proj-name">petalux — servo flower lamp</span>
+            <span class="proj-name">petalux — motorized flower lamp</span>
           </div>
           <div class="proj-row-right">
             <span class="proj-type">Mechatronics · Creative Labs</span>
@@ -824,7 +855,7 @@
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2024</span>
-            <span class="proj-name">hybrid rocket airframe</span>
+            <span class="proj-name">hybrid rocket</span>
           </div>
           <div class="proj-row-right">
             <span class="proj-type">Aerospace · Rocket Project</span>
@@ -839,7 +870,7 @@
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2024</span>
-            <span class="proj-name">bionic hand prototype</span>
+            <span class="proj-name">bionic hand</span>
           </div>
           <div class="proj-row-right">
             <span class="proj-type">Assistive Tech · Design</span>
@@ -853,10 +884,24 @@
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2024</span>
-            <span class="proj-name">ant colony sim · automated pill dispenser</span>
+            <span class="proj-name">ant colony simulation</span>
           </div>
           <div class="proj-row-right">
-            <span class="proj-type">MATLAB · SolidWorks</span>
+            <span class="proj-type">MATLAB · Simulation</span>
+            <span class="proj-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#about">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2024</span>
+            <span class="proj-name">automated pill dispenser</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">SolidWorks · DFM</span>
             <span class="proj-arrow">→</span>
           </div>
         </div>
@@ -937,6 +982,9 @@
             I'm a Mechanical Engineering student at UCLA with hands-on experience across the full design-to-manufacture pipeline: FEA in ANSYS, GD&T drawings, CNC and lathe machining, composite layups, and multi-part CAD assemblies in Fusion 360, SolidWorks, and Onshape.<br><br>
             Outside the machine shop I'm involved in ASME robotics, UCLA Creative Labs as a project lead, Theta Tau, X1 Robotics, and Pilipinos in Engineering.
           </p>
+        </div>
+        <div class="about-portrait fade-up">
+          <img src="jeremy_portrait.jpeg" alt="Jeremy De Leon at UCLA" />
         </div>
         <div class="about-details fade-up">
           <div class="detail-row">
