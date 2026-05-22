@@ -3,70 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeremy De Leon — Mechanical Engineer</title>
+  <title>jeremy de leon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Suisse+Int%27l:wght@300;400&display=swap" rel="stylesheet">
+  <!-- fallback if Suisse isn't available -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Palette ─── */
     :root {
-      --cream:       #F5F0E8;
-      --warm-white:  #FDFAF4;
-      --terracotta:  #C4603A;
-      --terra-light: #E8C4B0;
-      --terra-muted: #F0DDD3;
-      --sage:        #6B8C72;
-      --sage-light:  #C2D4C4;
-      --sage-muted:  #DDE9DE;
-      --gold:        #B8883A;
-      --gold-light:  #E8D4A8;
-      --gold-muted:  #F2E8D0;
-      --ink:         #2A2520;
-      --ink-mid:     #5C5248;
-      --ink-soft:    #8C8078;
-      --border:      rgba(42,37,32,0.12);
-      --border-mid:  rgba(42,37,32,0.2);
+      --black:   #0D0D0D;
+      --ink:     #111111;
+      --white:   #F2F0EB;
+      --dim:     rgba(242,240,235,0.45);
+      --dimmer:  rgba(242,240,235,0.22);
+      --accent:  #C4501A;
+      --accent2: #E8722A;
+      --border:  rgba(242,240,235,0.10);
+      --border2: rgba(242,240,235,0.16);
+      --sans:    'Epilogue', 'Helvetica Neue', Helvetica, sans-serif;
     }
 
-    /* ─── Reset & Base ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
       font-weight: 300;
-      line-height: 1.7;
+      line-height: 1.6;
       overflow-x: hidden;
+      cursor: none;
     }
 
-    /* Grain texture overlay */
-    body::before {
-      content: '';
+    /* ── CUSTOM CURSOR ── */
+    #cursor {
       position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      width: 10px; height: 10px;
+      background: var(--white);
+      border-radius: 50%;
       pointer-events: none;
-      z-index: 0;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.1s, width 0.25s, height 0.25s, background 0.25s;
+      mix-blend-mode: difference;
     }
 
-    /* ─── Typography ─── */
-    h1, h2, h3, h4 {
-      font-family: 'DM Serif Display', serif;
-      font-weight: 400;
-      line-height: 1.2;
+    #cursor.grow {
+      width: 48px; height: 48px;
     }
 
-    .label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    /* ─── Nav ─── */
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -74,1300 +60,1147 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 3rem;
-      background: rgba(245,240,232,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 1.6rem 2.5rem;
     }
 
     .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--white);
       text-decoration: none;
+      letter-spacing: 0.01em;
+      opacity: 0.9;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
       list-style: none;
+      gap: 2.25rem;
+      align-items: center;
     }
 
     .nav-links a {
       font-size: 13px;
-      font-weight: 400;
-      color: var(--ink-mid);
+      font-weight: 300;
+      color: var(--dim);
       text-decoration: none;
+      letter-spacing: 0.01em;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--terracotta); }
+    .nav-links a:hover { color: var(--white); }
 
-    /* ─── Layout Utilities ─── */
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 6rem 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
+    .nav-links .nav-accent {
+      color: var(--accent2);
+      font-weight: 400;
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 3.5rem;
-    }
+    .nav-links .nav-accent:hover { color: #f08040; }
 
-    .section-header h2 { font-size: clamp(2rem, 4vw, 2.75rem); }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border-mid);
-    }
-
-    /* ─── Hero ─── */
+    /* ── HERO ── */
     #hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding-top: 8rem;
-      padding-bottom: 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
+      justify-content: flex-end;
+      padding: 0 2.5rem 4rem;
     }
 
     .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      margin-bottom: 1.5rem;
     }
 
-    .hero-eyebrow-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--terracotta);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.6; }
-    }
-
-    .hero-name {
-      font-size: clamp(3.5rem, 8vw, 6.5rem);
-      color: var(--ink);
-      line-height: 1.05;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-name em {
-      font-style: italic;
-      color: var(--terracotta);
-    }
-
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      color: var(--ink-mid);
-      font-weight: 300;
-      margin-bottom: 2.5rem;
-      max-width: 520px;
-    }
-
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 3rem;
-    }
-
-    .pill {
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 400;
-      border: 1px solid;
-    }
-
-    .pill-terra {
-      background: var(--terra-muted);
-      border-color: var(--terra-light);
-      color: var(--terracotta);
-    }
-
-    .pill-sage {
-      background: var(--sage-muted);
-      border-color: var(--sage-light);
-      color: var(--sage);
-    }
-
-    .pill-gold {
-      background: var(--gold-muted);
-      border-color: var(--gold-light);
-      color: var(--gold);
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 1.5px solid;
-    }
-
-    .btn-primary {
-      background: var(--terracotta);
-      border-color: var(--terracotta);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: #b05530;
-      border-color: #b05530;
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border-color: var(--border-mid);
-      color: var(--ink);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--ink-mid);
-      transform: translateY(-1px);
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--ink-soft);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .scroll-line {
-      width: 40px;
+    .eyebrow-line {
+      width: 32px;
       height: 1px;
-      background: var(--ink-soft);
-      animation: scrollLine 2s ease-in-out infinite;
+      background: var(--dimmer);
     }
 
-    @keyframes scrollLine {
-      0%, 100% { width: 40px; opacity: 1; }
-      50% { width: 20px; opacity: 0.4; }
+    .hero-headline {
+      font-family: var(--sans);
+      font-size: clamp(3.5rem, 7.5vw, 7.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 900px;
+      margin-bottom: 5rem;
     }
 
-    /* ─── Decorative Background Text ─── */
-    .bg-text {
+    /* ── PROJECT ROW (the .nitro style) ── */
+    .proj-row {
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid var(--border2);
+      cursor: none;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proj-row::before {
+      content: '';
       position: absolute;
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(6rem, 16vw, 14rem);
-      color: rgba(42,37,32,0.04);
-      pointer-events: none;
-      white-space: nowrap;
-      line-height: 1;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.76,0,0.24,1);
       z-index: 0;
     }
 
-    /* ─── About ─── */
-    #about { background: transparent; }
+    .proj-row:hover::before { transform: scaleX(1); }
+
+    .proj-row:last-of-type { border-bottom: 1px solid var(--border2); }
+
+    .proj-row-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1.5rem 0;
+      gap: 2rem;
+    }
+
+    .proj-row-left {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      flex: 1;
+    }
+
+    .proj-year {
+      font-size: 11px;
+      color: var(--dimmer);
+      letter-spacing: 0.06em;
+      min-width: 36px;
+      flex-shrink: 0;
+      font-weight: 300;
+    }
+
+    .proj-name {
+      font-family: var(--sans);
+      font-size: clamp(1.4rem, 3vw, 2.25rem);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .proj-row:hover .proj-name { color: var(--white); }
+
+    .proj-row-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-shrink: 0;
+    }
+
+    .proj-type {
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .proj-arrow {
+      font-size: 1.4rem;
+      color: var(--white);
+      line-height: 1;
+      transform: rotate(0deg);
+      transition: transform 0.3s;
+    }
+
+    .proj-row:hover .proj-arrow { transform: rotate(-45deg); }
+
+    /* Preview image on hover */
+    .proj-preview {
+      position: fixed;
+      width: 320px;
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0;
+      transform: scale(0.92) rotate(-2deg);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .proj-preview img, .proj-preview .preview-gradient {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .proj-preview.visible {
+      opacity: 1;
+      transform: scale(1) rotate(-1deg);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--dimmer);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      border-top: 1px solid var(--border);
+    }
 
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 6rem;
       align-items: start;
     }
 
-    .about-text p {
-      color: var(--ink-mid);
-      margin-bottom: 1.25rem;
-      font-size: 1.05rem;
+    .about-statement {
+      font-family: var(--sans);
+      font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 2rem;
     }
 
-    .about-text p:last-child { margin-bottom: 0; }
+    .about-statement em {
+      font-style: italic;
+      color: var(--accent2);
+      font-family: 'Instrument Serif', serif;
+    }
+
+    .about-body {
+      font-size: 15px;
+      color: var(--dim);
+      line-height: 1.8;
+    }
 
     .about-details {
       display: flex;
       flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
       gap: 1rem;
     }
 
-    .detail-card {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .detail-card:hover {
-      border-color: var(--border-mid);
-      transform: translateX(4px);
-    }
-
-    .detail-card-label {
+    .detail-key {
       font-size: 11px;
-      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dimmer);
+      font-weight: 300;
+      flex-shrink: 0;
+    }
+
+    .detail-val {
+      font-size: 14px;
+      color: var(--white);
+      text-align: right;
+    }
+
+    /* ── SKILLS ── */
+    #skills { border-top: 1px solid var(--border); }
+
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .skill-block {
+      padding: 2rem 0 2rem 0;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.75rem 2rem;
+      transition: background 0.2s;
+    }
+
+    .skill-block:nth-child(3n) { border-right: none; }
+    .skill-block:nth-last-child(-n+3) { border-bottom: none; }
+
+    .skill-block:hover { background: rgba(242,240,235,0.03); }
+
+    .skill-cat {
+      font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-bottom: 0.3rem;
-    }
-
-    .detail-card-value {
-      font-size: 1rem;
+      color: var(--accent2);
+      margin-bottom: 1rem;
       font-weight: 400;
-      color: var(--ink);
-    }
-
-    .detail-card-accent { border-left: 3px solid var(--terracotta); }
-    .detail-card-sage   { border-left: 3px solid var(--sage); }
-    .detail-card-gold   { border-left: 3px solid var(--gold); }
-
-    /* ─── Skills ─── */
-    #skills {
-      background: var(--warm-white);
-      max-width: 100%;
-      padding: 6rem 0;
-    }
-
-    #skills .inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 3rem;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .skill-category:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-mid);
-    }
-
-    .skill-category-icon {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-category h3 {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      color: var(--ink);
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
     .skill-tag {
-      font-size: 12px;
-      padding: 0.25rem 0.6rem;
+      font-size: 13px;
+      color: var(--dim);
+      font-weight: 300;
+    }
+
+    .skill-tag::after {
+      content: '·';
+      margin-left: 0.5rem;
+      color: var(--dimmer);
+    }
+
+    .skill-tag:last-child::after { content: ''; }
+
+    /* ── FEATURED PROJECT (di carlo) ── */
+    #featured { border-top: 1px solid var(--border); }
+
+    .featured-card {
+      border: 1px solid var(--border2);
       border-radius: 4px;
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      color: var(--ink-mid);
-    }
-
-    /* ─── Projects ─── */
-    #projects { position: relative; }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.75rem;
-    }
-
-    .project-card {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
     }
 
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--border-mid);
-      box-shadow: 0 16px 40px rgba(42,37,32,0.08);
+    .fc-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
 
-    .project-card-header {
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3.5rem;
+    .fc-gallery {
       position: relative;
       overflow: hidden;
+      background: #1a1a1a;
+      min-height: 360px;
     }
 
-    .project-card-header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 40%, rgba(253,250,244,0.9) 100%);
-    }
-
-    .header-terra { background: var(--terra-muted); }
-    .header-sage  { background: var(--sage-muted); }
-    .header-gold  { background: var(--gold-muted); }
-    .header-blue  { background: #dde8f0; }
-    .header-pink  { background: #f0dde8; }
-
-    .project-card-body {
-      padding: 1.5rem;
-    }
-
-    .project-meta {
+    .fc-slides {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.75rem;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.76,0,0.24,1);
     }
 
-    .project-tag {
+    .fc-slide {
+      min-width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fc-arrow {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(13,13,13,0.7);
+      border: 1px solid var(--border2);
+      color: var(--white);
+      width: 36px; height: 36px;
+      border-radius: 2px;
+      cursor: none;
+      font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+      transition: background 0.2s;
+    }
+
+    .fc-arrow:hover { background: rgba(13,13,13,0.95); }
+    .fc-arrow.prev { left: 12px; }
+    .fc-arrow.next { right: 12px; }
+
+    .fc-dots {
+      position: absolute;
+      bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 6px; z-index: 2;
+    }
+
+    .fc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(242,240,235,0.3);
+      border: none; cursor: none; padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .fc-dot.active { background: var(--white); transform: scale(1.4); }
+
+    .fc-info {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(242,240,235,0.03);
+    }
+
+    .fc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 11px;
-      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
+      color: var(--accent2);
+      font-weight: 400;
+      margin-bottom: 1rem;
     }
 
-    .tag-terra { background: var(--terra-muted); color: var(--terracotta); }
-    .tag-sage  { background: var(--sage-muted); color: var(--sage); }
-    .tag-gold  { background: var(--gold-muted); color: var(--gold); }
-
-    .project-year {
-      font-size: 12px;
-      color: var(--ink-soft);
-    }
-
-    .project-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .project-card p {
-      font-size: 14px;
-      color: var(--ink-mid);
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .tech-chip {
-      font-size: 11px;
-      padding: 0.2rem 0.55rem;
-      border-radius: 3px;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      color: var(--ink-soft);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 0.6rem;
-    }
-
-    .project-link {
-      font-size: 13px;
-      color: var(--ink-mid);
-      text-decoration: none;
-      padding: 0.3rem 0.75rem;
-      border: 1px solid var(--border-mid);
-      border-radius: 5px;
-      transition: all 0.2s;
-    }
-
-    .project-link:hover {
-      color: var(--terracotta);
-      border-color: var(--terracotta);
-    }
-
-    /* ─── Experience / Timeline ─── */
-    #experience { background: transparent; }
-
-    .timeline {
-      position: relative;
-      padding-left: 2.5rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0.5rem; bottom: 0;
-      width: 1px;
-      background: var(--border-mid);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 3rem;
-    }
-
-    .timeline-item:last-child { margin-bottom: 0; }
-
-    .timeline-dot {
-      position: absolute;
-      left: -2.5rem;
-      top: 0.35rem;
-      width: 11px; height: 11px;
+    .fc-badge-dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
-      border: 2px solid var(--terracotta);
-      background: var(--cream);
-      transform: translateX(-5px);
+      background: var(--accent2);
+      animation: pulse 2.5s ease-in-out infinite;
     }
 
-    .timeline-date {
-      font-size: 12px;
-      color: var(--ink-soft);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.35rem;
+    @keyframes pulse {
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.5); opacity:0.5; }
     }
 
-    .timeline-item h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.15rem;
+    .fc-info h3 {
+      font-family: var(--sans);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 0.5rem;
     }
 
-    .timeline-org {
+    .fc-org { font-size: 13px; color: var(--accent2); margin-bottom: 1.25rem; }
+
+    .fc-desc {
       font-size: 14px;
-      color: var(--terracotta);
-      margin-bottom: 0.75rem;
+      color: var(--dim);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 1.5rem;
     }
 
-    .timeline-item p {
-      font-size: 14px;
-      color: var(--ink-mid);
-      max-width: 580px;
+    .fc-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+
+    .fc-tag {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--border2);
+      color: var(--dim);
+      border-radius: 2px;
     }
 
-    /* ─── Contact ─── */
-    #contact {
-      background: var(--ink);
-      max-width: 100%;
-      padding: 6rem 0;
-      color: var(--cream);
+    .fc-link {
+      font-size: 13px;
+      color: var(--dim);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border2);
+      padding-bottom: 2px;
+      width: fit-content;
+      transition: color 0.2s, border-color 0.2s;
     }
 
-    #contact .inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 3rem;
-    }
+    .fc-link:hover { color: var(--white); border-color: var(--white); }
 
-    #contact .section-header h2 { color: var(--cream); }
-    #contact .section-line { background: rgba(245,240,232,0.2); }
-    #contact .label { color: rgba(245,240,232,0.4); }
-
-    .contact-grid {
+    .fc-bottom {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 5rem;
-      align-items: start;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
     }
 
-    .contact-intro {
-      font-size: 1.5rem;
-      font-family: 'DM Serif Display', serif;
-      line-height: 1.45;
-      color: var(--cream);
+    .fc-contrib {
+      padding: 1.5rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .fc-contrib:last-child { border-right: none; }
+
+    .fc-contrib-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dimmer);
+      margin-bottom: 0.5rem;
+    }
+
+    .fc-contrib-title {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .fc-contrib-desc {
+      font-size: 12.5px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* ── TIMELINE ── */
+    #experience { border-top: 1px solid var(--border); }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+
+    .exp-col-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dimmer);
       margin-bottom: 2rem;
     }
 
-    .contact-intro em {
+    .tl { display: flex; flex-direction: column; }
+
+    .tl-item {
+      display: flex;
+      gap: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+
+    .tl-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .tl-num {
+      font-size: 11px;
+      color: var(--dimmer);
+      min-width: 20px;
+      padding-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .tl-content {}
+
+    .tl-date {
+      font-size: 11px;
+      color: var(--dimmer);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .tl-title {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.2rem;
+    }
+
+    .tl-org { font-size: 12px; color: var(--accent2); margin-bottom: 0.5rem; }
+    .tl-org-sage { color: #6aaa72; }
+    .tl-org-gold { color: #c4a040; }
+
+    .tl-desc { font-size: 13px; color: var(--dim); line-height: 1.65; }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+      background: var(--ink);
+    }
+
+    .contact-section {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-heading {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 4rem;
+      max-width: 700px;
+    }
+
+    .contact-heading em {
       font-style: italic;
-      color: var(--terra-light);
+      font-family: 'Instrument Serif', serif;
+      color: var(--accent2);
     }
 
     .contact-links {
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      border-top: 1px solid var(--border2);
     }
 
-    .contact-link-item {
+    .cl {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      color: rgba(245,240,232,0.7);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s;
-      padding-bottom: 0.9rem;
-      border-bottom: 1px solid rgba(245,240,232,0.1);
-    }
-
-    .contact-link-item:hover { color: var(--terra-light); }
-    .contact-link-item:last-child { border-bottom: none; }
-
-    .contact-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: rgba(245,240,232,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    /* ─── Footer ─── */
-    footer {
-      background: var(--ink);
-      border-top: 1px solid rgba(245,240,232,0.1);
-      text-align: center;
-      padding: 1.5rem 3rem;
-      font-size: 12px;
-      color: rgba(245,240,232,0.3);
-    }
-
-    /* ─── Featured Project Card ─── */
-    .project-card-featured {
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      grid-column: 1 / -1;
-      transition: border-color 0.25s;
-    }
-
-    .project-card-featured:hover { border-color: var(--border-mid); }
-
-    .featured-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 340px;
-    }
-
-    .featured-gallery {
-      position: relative;
-      overflow: hidden;
-      background: #1a1a1a;
-    }
-
-    .featured-gallery-slides {
-      display: flex;
-      height: 100%;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .featured-gallery-slide {
-      min-width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    .featured-gallery-slide.gif-slide {
-      object-fit: cover;
-    }
-
-    .gallery-nav {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-      z-index: 2;
-    }
-
-    .gallery-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      cursor: pointer;
-      border: none;
-      padding: 0;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .gallery-dot.active {
-      background: #fff;
-      transform: scale(1.3);
-    }
-
-    .gallery-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.35);
-      border: none;
-      color: #fff;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      transition: background 0.2s;
-    }
-
-    .gallery-arrow:hover { background: rgba(0,0,0,0.6); }
-    .gallery-arrow.prev { left: 10px; }
-    .gallery-arrow.next { right: 10px; }
-
-    .featured-info {
-      padding: 2.25rem 2.5rem;
-      display: flex;
-      flex-direction: column;
       justify-content: space-between;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--dim);
+      font-size: 15px;
+      transition: color 0.2s;
+      cursor: none;
     }
 
-    .featured-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--terra-muted);
-      color: var(--terracotta);
-      border: 1px solid var(--terra-light);
-      border-radius: 100px;
-      padding: 0.3rem 0.9rem;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      width: fit-content;
-      margin-bottom: 1rem;
+    .cl:hover { color: var(--white); }
+
+    .cl-arrow {
+      font-size: 1rem;
+      transform: rotate(0deg);
+      transition: transform 0.25s;
     }
 
-    .featured-badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--terracotta);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
+    .cl:hover .cl-arrow { transform: rotate(-45deg); }
 
-    .featured-info h3 {
-      font-size: 1.6rem;
-      line-height: 1.25;
-      margin-bottom: 0.3rem;
-    }
-
-    .featured-org {
-      font-size: 13px;
-      color: var(--terracotta);
-      margin-bottom: 1rem;
-      font-weight: 400;
-    }
-
-    .featured-info > p {
-      font-size: 14px;
-      color: var(--ink-mid);
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
-      flex: 1;
-    }
-
-    .featured-bottom {
+    /* ── FOOTER ── */
+    footer {
       border-top: 1px solid var(--border);
-      padding: 1.75rem 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .featured-contribution {
+      padding: 1.5rem 2.5rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--ink);
     }
 
-    .contribution-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .contribution-title {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 0.15rem;
-    }
-
-    .contribution-desc {
+    footer span {
       font-size: 12px;
-      color: var(--ink-mid);
-      line-height: 1.55;
+      color: var(--dimmer);
+      letter-spacing: 0.04em;
     }
 
-    /* ─── Fade-in animations ─── */
+    /* ── FADE IN ── */
     .fade-up {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
 
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-up.visible { opacity: 1; transform: none; }
 
-    /* ─── Responsive ─── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.25rem; }
-      section { padding: 4rem 1.5rem; }
-      #hero { padding: 7rem 1.5rem 4rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      #skills .inner, #contact .inner { padding: 0 1.5rem; }
-      .hero-scroll { left: 1.5rem; }
-      .featured-top { grid-template-columns: 1fr; }
-      .featured-gallery { min-height: 240px; }
-      .featured-info { padding: 1.5rem; }
-      .featured-bottom { grid-template-columns: 1fr; padding: 1.5rem; gap: 1rem; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { padding: 0 1.5rem 3.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .about-grid, .fc-top, .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-list { grid-template-columns: 1fr 1fr; }
+      .fc-bottom { grid-template-columns: 1fr; }
+      .fc-contrib { border-right: none; border-bottom: 1px solid var(--border); }
+      .fc-contrib:last-child { border-bottom: none; }
+      .fc-gallery { min-height: 240px; }
+      .fc-slide { height: 240px; }
+      .contact-section { padding: 4rem 1.5rem; }
+      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      body { cursor: auto; }
+      #cursor { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── Navigation ─── -->
+  <div id="cursor"></div>
+
+  <!-- hover preview card (follows cursor) -->
+  <div class="proj-preview" id="projPreview">
+    <div id="projPreviewInner"></div>
+  </div>
+
+  <!-- ── NAV ── -->
   <nav>
-    <a href="#hero" class="nav-logo">JDL</a>
+    <a href="#hero" class="nav-logo">.jdl</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#about">about</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#contact">contact</a></li>
+      <li><a href="JeremyDeLeon_Resume.pdf" target="_blank" class="nav-accent">resume ↗</a></li>
     </ul>
   </nav>
 
-  <!-- ─── Hero ─── -->
-  <div style="position:relative; overflow:hidden;">
-    <div class="bg-text" style="right:-2%; top:30%;">ME</div>
-    <section id="hero">
-      <div class="hero-eyebrow">
-        <div class="hero-eyebrow-dot"></div>
-        <span class="label">Available for internships & research</span>
-      </div>
-      <h1 class="hero-name">
-        Jeremy<br><em>De Leon</em>
-      </h1>
-      <p class="hero-tagline">
-        Mechanical Engineering student at UCLA — designing systems that bridge physical precision with thoughtful problem-solving.
-      </p>
-      <div class="hero-pills">
-        <span class="pill pill-terra">🎓 UCLA</span>
-        <span class="pill pill-sage">⚙️ Mechanical Engineering</span>
-        <span class="pill pill-gold">📍 Los Angeles, CA</span>
-      </div>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
-        <a href="resume.pdf" class="btn btn-outline" target="_blank">Resume ↗</a>
-      </div>
-      <div class="hero-scroll">
-        <div class="scroll-line"></div>
-        Scroll
-      </div>
-    </section>
-  </div>
-
-  <!-- ─── About ─── -->
-  <section id="about">
-    <div class="section-header fade-up">
-      <h2>About</h2>
-      <div class="section-line"></div>
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-eyebrow fade-up">
+      <div class="eyebrow-line"></div>
+      mechanical engineer · ucla class of '27
     </div>
-    <div class="about-grid">
-      <div class="about-text fade-up">
-        <p>
-          I'm Jeremy, a mechanical engineering student at UCLA with a passion for turning complex problems into elegant, functional solutions. Whether it's modeling fluid dynamics, prototyping hardware, or running FEA simulations, I love the entire process — from napkin sketch to finished component.
-        </p>
-        <p>
-          Outside the lab, I'm drawn to how engineering intersects with sustainability and design. I believe the best engineering is invisible — it just works, beautifully.
-        </p>
-        <p>
-          I'm actively looking for internship opportunities in product development, aerospace, robotics, or sustainable energy to grow my hands-on experience alongside my coursework.
-        </p>
-      </div>
-      <div class="about-details fade-up">
-        <div class="detail-card detail-card-accent">
-          <div class="detail-card-label">University</div>
-          <div class="detail-card-value">University of California, Los Angeles</div>
+    <h1 class="hero-headline fade-up">
+      a mechanical engineer<br>
+      who designs, simulates,<br>
+      and actually builds things
+    </h1>
+
+    <!-- Project rows (the .nitro-style list) -->
+    <div id="projects">
+      <a class="proj-row fade-up"
+         href="#featured"
+         data-preview="dicarlo_cad.png">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2026</span>
+            <span class="proj-name">ebot bio toolhead exchange</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">Research · Di Carlo Lab</span>
+            <span class="proj-arrow">→</span>
+          </div>
         </div>
-        <div class="detail-card detail-card-sage">
-          <div class="detail-card-label">Major</div>
-          <div class="detail-card-value">Mechanical Engineering, B.S.</div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#about"
+         data-preview="dicarlo_part.jpeg">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2025</span>
+            <span class="proj-name">asme bruin bb-8 arm</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">Mechanical Design</span>
+            <span class="proj-arrow">→</span>
+          </div>
         </div>
-        <div class="detail-card detail-card-gold">
-          <div class="detail-card-label">Interests</div>
-          <div class="detail-card-value">Robotics · Sustainable Design · Aerospace</div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#about"
+         data-preview="dicarlo_machining.gif">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2026</span>
+            <span class="proj-name">petalux — servo flower lamp</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">Mechatronics · Creative Labs</span>
+            <span class="proj-arrow">→</span>
+          </div>
         </div>
-        <div class="detail-card detail-card-accent">
-          <div class="detail-card-label">Status</div>
-          <div class="detail-card-value">Open to Internships — Summer 2025</div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#about"
+         data-preview="dicarlo_tools.jpeg">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2024</span>
+            <span class="proj-name">hybrid rocket airframe</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">Aerospace · Rocket Project</span>
+            <span class="proj-arrow">→</span>
+          </div>
         </div>
-      </div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#about"
+         data-preview="dicarlo_cnc.jpeg">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2024</span>
+            <span class="proj-name">bionic hand prototype</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">Assistive Tech · Design</span>
+            <span class="proj-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#about">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">2024</span>
+            <span class="proj-name">ant colony sim · automated pill dispenser</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">MATLAB · SolidWorks</span>
+            <span class="proj-arrow">→</span>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
-  <!-- ─── Skills ─── -->
-  <div id="skills">
-    <div class="inner">
-      <div class="section-header fade-up">
-        <h2>Skills</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-category fade-up">
-          <div class="skill-category-icon">🔩</div>
-          <h3>CAD & Modeling</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">AutoCAD</span>
-            <span class="skill-tag">Fusion 360</span>
-            <span class="skill-tag">CATIA</span>
-            <span class="skill-tag">Onshape</span>
+  <!-- ── FEATURED DEEP-DIVE ── -->
+  <div id="featured" style="border-top: 1px solid var(--border);">
+    <div class="section">
+      <div class="section-label fade-up">featured project</div>
+      <div class="featured-card fade-up">
+        <div class="fc-top">
+          <div class="fc-gallery">
+            <div class="fc-slides" id="gallerySlides">
+              <img class="fc-slide" src="dicarlo_cad.png"       alt="Exploded CAD — Toolhead Exchange Mechanism" />
+              <img class="fc-slide" src="dicarlo_part.jpeg"     alt="CNC-machined aluminum flanged housing" />
+              <img class="fc-slide" src="dicarlo_machining.gif" alt="CNC machining in action" />
+              <img class="fc-slide" src="dicarlo_tools.jpeg"    alt="12-tool setup on Haas Mini Mill rack" />
+              <img class="fc-slide" src="dicarlo_cnc.jpeg"      alt="Haas Mini Mill — UCLA machine shop" />
+            </div>
+            <button class="fc-arrow prev" onclick="galleryNav(-1)">&#8249;</button>
+            <button class="fc-arrow next" onclick="galleryNav(1)">&#8250;</button>
+            <div class="fc-dots" id="galleryDots"></div>
+          </div>
+          <div class="fc-info">
+            <div>
+              <div class="fc-badge"><div class="fc-badge-dot"></div>live research · jan 2026 – present</div>
+              <h3>eBOT Bio Toolhead<br>Exchange Mechanism</h3>
+              <div class="fc-org">UCLA Di Carlo Lab — Undergraduate Researcher</div>
+              <p class="fc-desc">
+                Designed and manufactured a modular toolhead exchange system for a benchtop bioassay robot — miniaturizing and automating full microfluidic workflows driven by LLM integration. Every structural component was machined in-house on Haas CNC mills and lathes from 6061-T6 aluminum and stainless steel.
+              </p>
+              <div class="fc-tags">
+                <span class="fc-tag">Fusion 360</span>
+                <span class="fc-tag">GD&T</span>
+                <span class="fc-tag">CNC Milling</span>
+                <span class="fc-tag">Manual Lathe</span>
+                <span class="fc-tag">6061-T6 Al</span>
+                <span class="fc-tag">Stainless Steel</span>
+                <span class="fc-tag">3D Printing</span>
+              </div>
+            </div>
+            <a href="https://www.dicarlolaboratory.com/" target="_blank" class="fc-link">Di Carlo Lab ↗</a>
           </div>
         </div>
-        <div class="skill-category fade-up">
-          <div class="skill-category-icon">🧮</div>
-          <h3>Analysis & Simulation</h3>
+        <div class="fc-bottom">
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Mechanism Design</div>
+            <div class="fc-contrib-title">3-Axis Toolhead Articulation</div>
+            <div class="fc-contrib-desc">253mm radial distance with ±0.25mm inner / ±0.75mm outer tolerances. Press-fit magnet + dowel-spring preload for repeatable dynamic loading.</div>
+          </div>
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Manufacturing</div>
+            <div class="fc-contrib-title">Haas CNC · Lathe · Manual Mill</div>
+            <div class="fc-contrib-desc">Programmed 12-tool setups across roughing and finishing passes to produce the flanged aluminum housing and custom frame components.</div>
+          </div>
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Tolerance & Assembly</div>
+            <div class="fc-contrib-title">GD&T — Mixed-Material Fit</div>
+            <div class="fc-contrib-desc">Resolved tolerance stack-up and alignment between 3D-printed PLA and machined stainless steel without secondary fitting operations.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <div id="about">
+    <div class="section">
+      <div class="section-label fade-up">about</div>
+      <div class="about-grid">
+        <div class="fade-up">
+          <p class="about-statement">
+            I design systems that are precise by intent, not by accident —<em> from sketch to finished part.</em>
+          </p>
+          <p class="about-body">
+            I'm a Mechanical Engineering student at UCLA with hands-on experience across the full design-to-manufacture pipeline: FEA in ANSYS, GD&T drawings, CNC and lathe machining, composite layups, and multi-part CAD assemblies in Fusion 360, SolidWorks, and Onshape.<br><br>
+            Outside the machine shop I'm involved in ASME robotics, UCLA Creative Labs as a project lead, Theta Tau, X1 Robotics, and Pilipinos in Engineering.
+          </p>
+        </div>
+        <div class="about-details fade-up">
+          <div class="detail-row">
+            <span class="detail-key">University</span>
+            <span class="detail-val">UCLA — Class of 2027</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Major</span>
+            <span class="detail-val">B.S. Mechanical Engineering</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Location</span>
+            <span class="detail-val">Los Angeles, CA</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Coursework</span>
+            <span class="detail-val">Dynamics · Mechanisms · Thermo · Manufacturing · CAD</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Activities</span>
+            <span class="detail-val">Theta Tau · Creative Labs · Rocket Project · X1 Robotics · PIE</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Status</span>
+            <span class="detail-val" style="color: var(--accent2);">open to internships — 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SKILLS ── -->
+  <div id="skills-section" style="border-top: 1px solid var(--border);">
+    <div class="section">
+      <div class="section-label fade-up">skills & tools</div>
+      <div class="skills-list fade-up">
+        <div class="skill-block">
+          <div class="skill-cat">CAD & Modeling</div>
           <div class="skill-tags">
-            <span class="skill-tag">ANSYS</span>
+            <span class="skill-tag">Fusion 360</span>
+            <span class="skill-tag">SolidWorks</span>
+            <span class="skill-tag">Onshape</span>
+            <span class="skill-tag">AutoCAD</span>
+            <span class="skill-tag">Revit</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat">Analysis</div>
+          <div class="skill-tags">
             <span class="skill-tag">FEA</span>
+            <span class="skill-tag">ANSYS</span>
             <span class="skill-tag">CFD</span>
             <span class="skill-tag">MATLAB</span>
             <span class="skill-tag">Simulink</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
-          <div class="skill-category-icon">🖨️</div>
-          <h3>Fabrication</h3>
+        <div class="skill-block">
+          <div class="skill-cat">Manufacturing</div>
           <div class="skill-tags">
+            <span class="skill-tag">CNC Milling</span>
+            <span class="skill-tag">Manual Lathe</span>
             <span class="skill-tag">3D Printing</span>
-            <span class="skill-tag">CNC Machining</span>
             <span class="skill-tag">Laser Cutting</span>
-            <span class="skill-tag">Welding</span>
-            <span class="skill-tag">GD&T</span>
+            <span class="skill-tag">Carbon Fiber Layup</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
-          <div class="skill-category-icon">💻</div>
-          <h3>Programming</h3>
+        <div class="skill-block">
+          <div class="skill-cat">Engineering Methods</div>
           <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">C++</span>
-            <span class="skill-tag">Arduino</span>
-            <span class="skill-tag">R</span>
+            <span class="skill-tag">GD&T</span>
+            <span class="skill-tag">FMEA</span>
+            <span class="skill-tag">DFM / DFA</span>
+            <span class="skill-tag">Rapid Prototyping</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
-          <div class="skill-category-icon">📐</div>
-          <h3>Engineering Fundamentals</h3>
+        <div class="skill-block">
+          <div class="skill-cat">Programming</div>
+          <div class="skill-tags">
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Arduino IDE</span>
+            <span class="skill-tag">Git</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-cat">Fundamentals</div>
           <div class="skill-tags">
             <span class="skill-tag">Thermodynamics</span>
             <span class="skill-tag">Fluid Mechanics</span>
-            <span class="skill-tag">Statics</span>
             <span class="skill-tag">Dynamics</span>
-            <span class="skill-tag">Materials Science</span>
-          </div>
-        </div>
-        <div class="skill-category fade-up">
-          <div class="skill-category-icon">🤝</div>
-          <h3>Collaboration</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Technical Writing</span>
-            <span class="skill-tag">LaTeX</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">Agile / Scrum</span>
-            <span class="skill-tag">Notion</span>
+            <span class="skill-tag">Strength of Materials</span>
+            <span class="skill-tag">Mechanisms</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ─── Projects ─── -->
-  <section id="projects" style="position:relative; overflow:hidden;">
-    <div class="bg-text" style="left:-2%; bottom:-10%; font-size: clamp(5rem, 12vw, 11rem);">work</div>
-    <div class="section-header fade-up">
-      <h2>Projects</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="projects-grid">
-
-      <!-- ─── Featured: Di Carlo Lab ─── -->
-      <div class="project-card-featured fade-up">
-        <div class="featured-top">
-          <div class="featured-gallery">
-            <div class="featured-gallery-slides" id="gallerySlides">
-              <img class="featured-gallery-slide" src="dicarlo_cad.png" alt="Exploded CAD view of toolhead exchange mechanism" />
-              <img class="featured-gallery-slide" src="dicarlo_part.jpeg" alt="CNC-machined aluminum flanged housing" />
-              <img class="featured-gallery-slide gif-slide" src="dicarlo_machining.gif" alt="CNC machining in action" />
-              <img class="featured-gallery-slide" src="dicarlo_tools.jpeg" alt="Labelled CNC tool holders on Haas Mini Mill tool rack" />
-              <img class="featured-gallery-slide" src="dicarlo_cnc.jpeg" alt="Haas Mini Mill CNC machine in the UCLA machine shop" />
-            </div>
-            <button class="gallery-arrow prev" onclick="galleryNav(-1)" aria-label="Previous image">&#8249;</button>
-            <button class="gallery-arrow next" onclick="galleryNav(1)" aria-label="Next image">&#8250;</button>
-            <div class="gallery-nav" id="galleryDots"></div>
-          </div>
-          <div class="featured-info">
-            <div>
-              <div class="featured-badge">
-                <div class="featured-badge-dot"></div>
-                Research · Jan 2026 – Present
-              </div>
-              <h3>eBOT Bio Toolhead Exchange Mechanism</h3>
-              <div class="featured-org">UCLA Di Carlo Lab — Undergraduate Researcher</div>
-              <p>
-                Designed and manufactured a modular toolhead exchange system for a benchtop bioassay robot integrating LLM-driven automation. The mechanism enables rapid, repeatable swapping of microfluidic and liquid-handling toolheads — bringing full bioassay workflows to a compact, automated platform. All custom structural components were machined in-house on Haas CNC mills and lathes from 6061-T6 aluminum and stainless steel.
-              </p>
-            </div>
-            <div>
-              <div class="project-tech" style="margin-bottom: 0.9rem;">
-                <span class="tech-chip">Fusion 360</span>
-                <span class="tech-chip">GD&T</span>
-                <span class="tech-chip">CNC Milling</span>
-                <span class="tech-chip">Manual Lathe</span>
-                <span class="tech-chip">Stainless Steel</span>
-                <span class="tech-chip">6061-T6 Aluminum</span>
-                <span class="tech-chip">3D Printing</span>
-              </div>
-              <div class="project-links">
-                <a href="https://www.dicarlolaboratory.com/" target="_blank" class="project-link">Di Carlo Lab ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="featured-bottom">
-          <div class="featured-contribution">
-            <div class="contribution-label">CAD & Mechanism Design</div>
-            <div class="contribution-title">3-Axis Toolhead Exchange</div>
-            <div class="contribution-desc">Designed an internal arm in Fusion 360 achieving 3-axis head articulation at a 253mm radial distance. Specified ±0.25mm inner / ±0.75mm outer diameter tolerances for a press-fit magnet and dowel-spring preload fastening strategy to ensure repeatable performance under dynamic loading.</div>
-          </div>
-          <div class="featured-contribution">
-            <div class="contribution-label">Manufacturing</div>
-            <div class="contribution-title">CNC, Lathe & Manual Milling</div>
-            <div class="contribution-desc">Performed all machining operations on Haas Mini Mills and manual machines. Programmed tool paths and managed a 12-tool setup across roughing and finishing passes to produce the custom flanged housing and frame components shown in photos.</div>
-          </div>
-          <div class="featured-contribution">
-            <div class="contribution-label">Tolerance & Assembly</div>
-            <div class="contribution-title">GD&T for Mixed-Material Assembly</div>
-            <div class="contribution-desc">Applied GD&T practices to resolve tolerance stack-up and alignment between 3D-printed PLA and machined stainless steel parts — ensuring reliable fit across a multi-material assembly without secondary fitting operations.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-card-header header-terra">🤖</div>
-        <div class="project-card-body">
-          <div class="project-meta">
-            <span class="project-tag tag-terra">Mechanical Design</span>
-            <span class="project-year">2025</span>
-          </div>
-          <h3>ASME Bruin BB-8 — Internal Arm</h3>
-          <p>Designed an internal articulation arm in SolidWorks for a holonomic spherical robot inspired by Star Wars' BB-8. Achieved 3-axis head movement at a 253mm radial distance with tight tolerance press-fit fastening. Validated structural integrity of 6061-T6 aluminum components via FEA with a 1.5–2× factor of safety.</p>
-          <div class="project-tech">
-            <span class="tech-chip">SolidWorks</span>
-            <span class="tech-chip">FEA</span>
-            <span class="tech-chip">6061-T6 Al</span>
-            <span class="tech-chip">GD&T</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">Details ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-card-header header-sage">🌸</div>
-        <div class="project-card-body">
-          <div class="project-meta">
-            <span class="project-tag tag-sage">Mechatronics</span>
-            <span class="project-year">2026</span>
-          </div>
-          <h3>Petalux — Servo-Actuated Flower Lamp</h3>
-          <p>Led a cross-functional team at UCLA Creative Labs building an interactive lamp with servo-actuated petals. Designed and iterated the open/close petal mechanism in Fusion 360, coordinating mechanical, electrical, and software integration via Arduino IDE and mobile map controls.</p>
-          <div class="project-tech">
-            <span class="tech-chip">Fusion 360</span>
-            <span class="tech-chip">Arduino IDE</span>
-            <span class="tech-chip">Servo Actuation</span>
-            <span class="tech-chip">3D Printing</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">Details ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-card-header header-gold">🚀</div>
-        <div class="project-card-body">
-          <div class="project-meta">
-            <span class="project-tag tag-gold">Aerospace</span>
-            <span class="project-year">2024–25</span>
-          </div>
-          <h3>UCLA Rocket Project — Hybrid Rocket Airframe</h3>
-          <p>Designed a 3-section carbon fiber body tube layup with ±45°/0° plies and reinforced bolted-joint regions. Manufactured plywood engine centering rings via laser-cut ¼" laminations epoxied into ½" structural rings — achieving strong buckling, bending, and thrust-alignment margins.</p>
-          <div class="project-tech">
-            <span class="tech-chip">Carbon Fiber</span>
-            <span class="tech-chip">Composite Layup</span>
-            <span class="tech-chip">Laser Cutting</span>
-            <span class="tech-chip">Structural Analysis</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">Details ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-card-header header-blue">🖐️</div>
-        <div class="project-card-body">
-          <div class="project-meta">
-            <span class="project-tag tag-sage">Assistive Tech</span>
-            <span class="project-year">2024</span>
-          </div>
-          <h3>Bionic Hand Prototype</h3>
-          <p>Led the mechanical design of a bionic hand prototype using Onshape. Built multi-part assemblies for finger actuation and integrated Arduino-based servo control for functional assistive-device demonstrations.</p>
-          <div class="project-tech">
-            <span class="tech-chip">Onshape</span>
-            <span class="tech-chip">Arduino IDE</span>
-            <span class="tech-chip">3D Printing</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">Details ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-card-header header-pink">💊</div>
-        <div class="project-card-body">
-          <div class="project-meta">
-            <span class="project-tag tag-terra">DFM</span>
-            <span class="project-year">2024</span>
-          </div>
-          <h3>Automated Pill Dispenser</h3>
-          <p>Designed a 15-part SolidWorks assembly for a dual-hopper pill dispenser in PLA. Applied DFM constraints across variable pill geometries, achieving a compact 22.5×7.5cm footprint optimized for 3D printability.</p>
-          <div class="project-tech">
-            <span class="tech-chip">SolidWorks</span>
-            <span class="tech-chip">DFM</span>
-            <span class="tech-chip">PLA / 3D Printing</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">Details ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card fade-up">
-        <div class="project-card-header header-gold">🐜</div>
-        <div class="project-card-body">
-          <div class="project-meta">
-            <span class="project-tag tag-gold">Simulation</span>
-            <span class="project-year">2024</span>
-          </div>
-          <h3>Ant Colony Pathfinding Simulation</h3>
-          <p>Built a probabilistic multi-agent simulation in MATLAB across 8 modular functions. Implemented concentration-weighted pheromone gradient steering, stochastic angle updates drawn from N(0,σ), and linear pheromone decay to produce emergent shortest-path discovery.</p>
-          <div class="project-tech">
-            <span class="tech-chip">MATLAB</span>
-            <span class="tech-chip">Multi-Agent Simulation</span>
-            <span class="tech-chip">Probabilistic Modeling</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">GitHub ↗</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ─── Experience / Timeline ─── -->
-  <section id="experience">
-    <div class="section-header fade-up">
-      <h2>Experience</h2>
-      <div class="section-line"></div>
-    </div>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0 5rem;">
-      <div>
-        <p class="label" style="margin-bottom: 2rem;">Work & Research</p>
-        <div class="timeline">
-          <div class="timeline-item fade-up">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">January 2026 – Present</div>
-            <h3>Undergraduate Researcher</h3>
-            <div class="timeline-org">UCLA Di Carlo Lab</div>
-            <p>CAD & manufacturing lead for a benchtop bioassay robot. Designed toolhead exchange mechanisms in Fusion 360, performed CNC milling, lathe, and drilling operations, and applied GD&T to resolve tolerance stack-up across 3D-printed and machined stainless steel assemblies.</p>
-          </div>
-          <div class="timeline-item fade-up">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">April 2026 – Present</div>
-            <h3>Project Lead</h3>
-            <div class="timeline-org">UCLA Creative Labs — Petalux</div>
-            <p>Leading the development of an interactive servo-actuated flower lamp. Coordinating mechanical, electrical, and software subteams, iterating Fusion 360 petal mechanism designs, and overseeing embedded Arduino control and mobile integration.</p>
-          </div>
-          <div class="timeline-item fade-up">
-            <div class="timeline-dot"></div>
-            <div class="timeline-date">Sept 2024 – June 2025</div>
-            <h3>Mechanical Engineer</h3>
-            <div class="timeline-org">UCLA Rocket Project — Hybrid Rocket</div>
-            <p>Designed carbon fiber body tube layups and manufactured laser-cut plywood engine centering rings for the hybrid rocket airframe, achieving strong structural margins for buckling and thrust-alignment loads.</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <p class="label" style="margin-bottom: 2rem;">Leadership & Clubs</p>
-        <div class="timeline">
-          <div class="timeline-item fade-up">
-            <div class="timeline-dot" style="border-color: var(--sage);"></div>
-            <div class="timeline-date">Sept 2025 – Present</div>
-            <h3>Mechanical Engineer</h3>
-            <div class="timeline-org" style="color: var(--sage);">ASME — Bruin BB-8</div>
-            <p>Designing internal articulation arm and structural components for a holonomic spherical robot. Responsible for SolidWorks modeling, tolerance analysis, and FEA sign-off before manufacturing.</p>
-          </div>
-          <div class="timeline-item fade-up">
-            <div class="timeline-dot" style="border-color: var(--gold);"></div>
-            <div class="timeline-date">Ongoing</div>
-            <h3>Member</h3>
-            <div class="timeline-org" style="color: var(--gold);">Theta Tau · X1 Robotics · PIE</div>
-            <p>Active in Theta Tau (engineering professional fraternity), X1 Robotics, and Pilipinos in Engineering — contributing to outreach, mentorship, and community-building within UCLA's engineering community.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Contact ─── -->
-  <div id="contact">
-    <div class="inner">
-      <div class="section-header fade-up">
-        <h2>Contact</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="contact-grid">
+  <!-- ── EXPERIENCE ── -->
+  <div id="experience">
+    <div class="section">
+      <div class="section-label fade-up">experience</div>
+      <div class="exp-grid">
         <div class="fade-up">
-          <p class="contact-intro">
-            Let's build something that <em>matters</em>. Whether it's a project, an internship, or just a conversation — I'd love to connect.
-          </p>
-          <a href="mailto:jeremylldeleon@gmail.com" class="btn btn-primary">Say Hello →</a>
+          <p class="exp-col-label">work & research</p>
+          <div class="tl">
+            <div class="tl-item">
+              <div class="tl-num">01</div>
+              <div class="tl-content">
+                <div class="tl-date">jan 2026 – present</div>
+                <div class="tl-title">Undergraduate Researcher — CAD & Manufacturing</div>
+                <div class="tl-org">UCLA Di Carlo Lab</div>
+                <p class="tl-desc">Designed the toolhead exchange mechanism for a benchtop bioassay robot. Performed CNC milling, lathe, and drilling ops; applied GD&T across 3D-printed and machined stainless steel assemblies.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">02</div>
+              <div class="tl-content">
+                <div class="tl-date">apr 2026 – present</div>
+                <div class="tl-title">Project Lead — Petalux</div>
+                <div class="tl-org">UCLA Creative Labs</div>
+                <p class="tl-desc">Spearheading an interactive servo-actuated flower lamp. Coordinating mechanical, electrical, and software subteams; iterating Fusion 360 petal mechanisms and Arduino-based controls.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">03</div>
+              <div class="tl-content">
+                <div class="tl-date">sept 2024 – june 2025</div>
+                <div class="tl-title">Mechanical Engineer — Hybrid Rocket</div>
+                <div class="tl-org">UCLA Rocket Project</div>
+                <p class="tl-desc">Designed a 3-section CF body tube layup with ±45°/0° plies. Manufactured laser-cut plywood engine centering rings epoxied into structural laminations for thrust-alignment and bending margin.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="contact-links fade-up">
-          <a href="mailto:jeremylldeleon@gmail.com" class="contact-link-item">
-            <div class="contact-icon">✉️</div>
-            jeremylldeleon@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/jeremy-de-leon" target="_blank" class="contact-link-item">
-            <div class="contact-icon">in</div>
-            linkedin.com/in/jeremy-de-leon
-          </a>
-          <a href="https://github.com/jeremydeleon" target="_blank" class="contact-link-item">
-            <div class="contact-icon">⌥</div>
-            github.com/jeremydeleon
-          </a>
-          <a href="JeremyDeLeon_Resume.pdf" target="_blank" class="contact-link-item">
-            <div class="contact-icon">↓</div>
-            Download Resume (PDF)
-          </a>
+        <div class="fade-up">
+          <p class="exp-col-label">leadership & clubs</p>
+          <div class="tl">
+            <div class="tl-item">
+              <div class="tl-num">01</div>
+              <div class="tl-content">
+                <div class="tl-date">sept 2025 – present</div>
+                <div class="tl-title">Mechanical Engineer — Bruin BB-8</div>
+                <div class="tl-org tl-org-sage">ASME UCLA</div>
+                <p class="tl-desc">Designing internal arm for a holonomic spherical robot: 3-axis articulation at 253mm radial distance, SolidWorks modeling, FEA sign-off, and tolerance analysis before manufacturing.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">02</div>
+              <div class="tl-content">
+                <div class="tl-date">ongoing</div>
+                <div class="tl-title">Member</div>
+                <div class="tl-org tl-org-gold">Theta Tau · X1 Robotics · PIE · PCN</div>
+                <p class="tl-desc">Active in Theta Tau (engineering professional fraternity), X1 Robotics, Pilipinos in Engineering, and Pilipino Cultural Night — engineering community and cultural outreach.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ─── Footer ─── -->
+  <!-- ── CONTACT ── -->
+  <div id="contact">
+    <div class="contact-section">
+      <h2 class="contact-heading fade-up">
+        let's build<br>
+        something <em>real.</em>
+      </h2>
+      <div class="contact-links fade-up">
+        <a href="mailto:jeremylldeleon@gmail.com" class="cl">
+          <span>jeremylldeleon@gmail.com</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://linkedin.com/in/jeremy-de-leon" target="_blank" class="cl">
+          <span>linkedin.com/in/jeremy-de-leon</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="https://github.com/jeremydeleon" target="_blank" class="cl">
+          <span>github.com/jeremydeleon</span>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a href="JeremyDeLeon_Resume.pdf" target="_blank" class="cl">
+          <span>download resume ↓</span>
+          <span class="cl-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    © 2025 Jeremy De Leon · Built with HTML & hosted on GitHub Pages
+    <span>jeremy de leon · mechanical engineering · ucla</span>
+    <span>© 2026</span>
   </footer>
 
-  <!-- ─── Scroll Animation ─── -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-        }
+    // ── Custom cursor
+    const cursor = document.getElementById('cursor');
+    let mx = 0, my = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+    });
+
+    // ── Project row preview
+    const preview = document.getElementById('projPreview');
+    const previewInner = document.getElementById('projPreviewInner');
+
+    document.querySelectorAll('.proj-row[data-preview]').forEach(row => {
+      const src = row.getAttribute('data-preview');
+
+      row.addEventListener('mouseenter', () => {
+        previewInner.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover;display:block;" />`;
+        preview.classList.add('visible');
       });
-    }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      row.addEventListener('mousemove', e => {
+        preview.style.left = (e.clientX + 24) + 'px';
+        preview.style.top  = (e.clientY - 80) + 'px';
+      });
 
-    // Gallery slider
-    let currentSlide = 0;
-    const totalSlides = 5;
+      row.addEventListener('mouseleave', () => {
+        preview.classList.remove('visible');
+      });
+    });
+
+    // ── Scroll fade
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // ── Gallery
+    let cur = 0;
+    const total = 5;
     const slides = document.getElementById('gallerySlides');
-    const dotsContainer = document.getElementById('galleryDots');
+    const dotsEl = document.getElementById('galleryDots');
 
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('button');
-      dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      dot.onclick = () => goToSlide(i);
-      dotsContainer.appendChild(dot);
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('button');
+      d.className = 'fc-dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
     }
 
-    function goToSlide(n) {
-      currentSlide = (n + totalSlides) % totalSlides;
-      slides.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-      document.querySelectorAll('.gallery-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === currentSlide);
-      });
+    function goTo(n) {
+      cur = (n + total) % total;
+      slides.style.transform = `translateX(-${cur * 100}%)`;
+      document.querySelectorAll('.fc-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
     }
 
-    function galleryNav(dir) { goToSlide(currentSlide + dir); }
-
-    // Auto-advance every 4s
-    setInterval(() => galleryNav(1), 4000);
+    function galleryNav(dir) { goTo(cur + dir); }
+    setInterval(() => galleryNav(1), 4500);
   </script>
-
 </body>
 </html>
