@@ -740,7 +740,38 @@
       letter-spacing: 0.04em;
     }
 
-    /* ── FADE IN ── */
+    /* ── ARTWORK GRID ── */
+    .artwork-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.6fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .art-card {
+      border-radius: 4px;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+
+    .art-card img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), filter 0.4s;
+      filter: grayscale(15%);
+    }
+
+    .art-card:hover img {
+      transform: scale(1.03);
+      filter: grayscale(0%);
+    }
+
+    .art-card-tall img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── FADE UP ── */
     .fade-up {
       opacity: 0;
       transform: translateY(18px);
@@ -763,6 +794,9 @@
       .fc-contrib:last-child { border-bottom: none; }
       .fc-gallery { min-height: 240px; }
       .fc-slide { height: 240px; }
+      .artwork-grid { grid-template-columns: 1fr; }
+      .fc-top { grid-template-columns: 1fr; }
+      .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
       .contact-section { padding: 4rem 1.5rem; }
       footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
       body { cursor: auto; }
@@ -784,6 +818,7 @@
     <a href="#hero" class="nav-logo">.jdl</a>
     <ul class="nav-links">
       <li><a href="#projects">projects</a></li>
+      <li><a href="#artwork">artwork</a></li>
       <li><a href="#about">about</a></li>
       <li><a href="#experience">experience</a></li>
       <li><a href="#contact">contact</a></li>
@@ -821,7 +856,7 @@
 
       <a class="proj-row fade-up"
          href="#about"
-         data-preview="dicarlo_part.jpeg">
+         data-preview="bb8_build.jpg">
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2025</span>
@@ -835,8 +870,8 @@
       </a>
 
       <a class="proj-row fade-up"
-         href="#about"
-         data-preview="dicarlo_machining.gif">
+         href="#petalux-detail"
+         data-preview="petalux_petal.jpg">
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2026</span>
@@ -851,7 +886,7 @@
 
       <a class="proj-row fade-up"
          href="#about"
-         data-preview="dicarlo_tools.jpeg">
+         data-preview="bb8_sphere.jpg">
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2024</span>
@@ -866,7 +901,7 @@
 
       <a class="proj-row fade-up"
          href="#about"
-         data-preview="dicarlo_cnc.jpeg">
+         data-preview="jeremy_portrait.jpeg">
         <div class="proj-row-inner">
           <div class="proj-row-left">
             <span class="proj-year">2024</span>
@@ -902,6 +937,21 @@
           </div>
           <div class="proj-row-right">
             <span class="proj-type">SolidWorks · DFM</span>
+            <span class="proj-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="proj-row fade-up"
+         href="#artwork"
+         data-preview="art_blue.jpg">
+        <div class="proj-row-inner">
+          <div class="proj-row-left">
+            <span class="proj-year">ongoing</span>
+            <span class="proj-name">artwork</span>
+          </div>
+          <div class="proj-row-right">
+            <span class="proj-type">Painting · Drawing · Digital</span>
             <span class="proj-arrow">→</span>
           </div>
         </div>
@@ -1084,6 +1134,135 @@
     </div>
   </div>
 
+  <!-- ── BB-8 DETAIL ── -->
+  <div id="bb8-detail" style="border-top: 1px solid var(--border);">
+    <div class="section">
+      <div class="section-label fade-up">project detail</div>
+      <div class="featured-card fade-up">
+        <div class="fc-top">
+          <div class="fc-gallery">
+            <div class="fc-slides" id="bb8Slides">
+              <img class="fc-slide" src="bb8_build.jpg"   alt="Bruin BB-8 physical build in progress" />
+              <img class="fc-slide" src="bb8_cad.jpg"     alt="BB-8 internal drivetrain CAD assembly" />
+              <img class="fc-slide" src="bb8_sphere.jpg"  alt="BB-8 full sphere CAD render" />
+              <img class="fc-slide" src="bb8_diagram.jpg" alt="BB-8 full assembly diagram with labeled subsystems" />
+            </div>
+            <button class="fc-arrow prev" onclick="bb8Nav(-1)">&#8249;</button>
+            <button class="fc-arrow next" onclick="bb8Nav(1)">&#8250;</button>
+            <div class="fc-dots" id="bb8Dots"></div>
+          </div>
+          <div class="fc-info">
+            <div>
+              <div class="fc-badge"><div class="fc-badge-dot" style="background:var(--accent2);"></div>x1 robotics · sept 2025 – present</div>
+              <h3>Bruin BB-8 — Internal Arm</h3>
+              <div class="fc-org">ASME UCLA — X1 Robotics</div>
+              <p class="fc-desc">
+                Designed an internal articulation arm for a holonomic spherical robot inspired by BB-8 from Star Wars. The robot uses omni-wheels for holonomic movement inside the shell (hamster wheel effect), with a magnetically-attached head actuated by the internal arm. The full assembly integrates a drivetrain, depth-sensing camera, speaker, and NEO motors — all housed within a transparent outer shell.
+              </p>
+              <div class="fc-tags">
+                <span class="fc-tag">SolidWorks</span>
+                <span class="fc-tag">FEA</span>
+                <span class="fc-tag">6061-T6 Al</span>
+                <span class="fc-tag">GD&T</span>
+                <span class="fc-tag">Holonomic Drive</span>
+                <span class="fc-tag">Magnetic Coupling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fc-bottom">
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Mechanism Design</div>
+            <div class="fc-contrib-title">3-Axis Head Articulation</div>
+            <div class="fc-contrib-desc">Achieved 3-axis head movement at 253mm radial distance. Specified ±0.25mm inner / ±0.75mm outer tolerances for press-fit magnet and dowel-spring preload fastening strategy.</div>
+          </div>
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Structural Validation</div>
+            <div class="fc-contrib-title">FEA — 1.5–2× Factor of Safety</div>
+            <div class="fc-contrib-desc">Performed FEA to validate structural integrity of 6061-T6 aluminum components, confirming 1.5–2× factor of safety on all load-bearing parts prior to manufacturing.</div>
+          </div>
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">System Integration</div>
+            <div class="fc-contrib-title">Holonomic Spherical Drive</div>
+            <div class="fc-contrib-desc">The full assembly integrates omni-wheel drivetrain, magnetically-attached head, depth sensing camera, speaker, and motor electronics — all within a transparent outer shell.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PETALUX DETAIL ── -->
+  <div id="petalux-detail" style="border-top: 1px solid var(--border);">
+    <div class="section">
+      <div class="featured-card fade-up">
+        <div class="fc-top">
+          <div class="fc-gallery">
+            <div class="fc-slides" id="petaluxSlides">
+              <img class="fc-slide" src="petalux_petal.jpg"       alt="Petalux petal mechanism — Fusion 360 simulation showing 20° petal angle" />
+              <img class="fc-slide" src="petalux_components.jpg"  alt="Petalux full assembly, individual components, and physical prototype" />
+            </div>
+            <button class="fc-arrow prev" onclick="petaluxNav(-1)">&#8249;</button>
+            <button class="fc-arrow next" onclick="petaluxNav(1)">&#8250;</button>
+            <div class="fc-dots" id="petaluxDots"></div>
+          </div>
+          <div class="fc-info">
+            <div>
+              <div class="fc-badge"><div class="fc-badge-dot" style="background:var(--accent2);"></div>creative labs · apr 2026 – present</div>
+              <h3>Petalux — Motorized Flower Lamp</h3>
+              <div class="fc-org">UCLA Creative Labs — Project Lead</div>
+              <p class="fc-desc">
+                An interactive lamp with servo-actuated petals that open and close on command. As project lead, coordinated mechanical, electrical, and software subteams. Designed and iterated the petal mechanism in Fusion 360 — including a threaded lead screw shaft, petal bracket, and motor mount — and implemented embedded control via Arduino IDE with mobile map integration.
+              </p>
+              <div class="fc-tags">
+                <span class="fc-tag">Fusion 360</span>
+                <span class="fc-tag">Arduino IDE</span>
+                <span class="fc-tag">Servo Actuation</span>
+                <span class="fc-tag">3D Printing</span>
+                <span class="fc-tag">Embedded Control</span>
+                <span class="fc-tag">Project Lead</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fc-bottom">
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Mechanism Design</div>
+            <div class="fc-contrib-title">Open/Close Petal Linkage</div>
+            <div class="fc-contrib-desc">Designed a threaded lead screw drive system that actuates 8 petals simultaneously through 20° of rotation. Iterated in Fusion 360 with motion studies to validate geometry before printing.</div>
+          </div>
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Manufacturing</div>
+            <div class="fc-contrib-title">FDM 3D Printing</div>
+            <div class="fc-contrib-desc">All structural components 3D printed in PLA. Designed for printability with no support-heavy features, press-fit tolerances for shaft interfaces, and modular subassemblies for easy iteration.</div>
+          </div>
+          <div class="fc-contrib">
+            <div class="fc-contrib-label">Systems Integration</div>
+            <div class="fc-contrib-title">Arduino + Mobile Control</div>
+            <div class="fc-contrib-desc">Coordinated embedded Arduino control with a mobile interface for remote actuation. Managed cross-functional integration between mechanical, electrical, and software subteams.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ARTWORK ── -->
+  <div id="artwork" style="border-top: 1px solid var(--border);">
+    <div class="section">
+      <div class="section-label fade-up">artwork</div>
+      <div class="artwork-grid fade-up">
+        <div class="art-card">
+          <img src="art_blue.jpg" alt="Blue oil painting — hands holding fabric" />
+        </div>
+        <div class="art-card art-card-tall">
+          <img src="art_clock.jpg" alt="Charcoal drawing — melting clock held by hand" />
+        </div>
+        <div class="art-card">
+          <img src="art_space.jpg" alt="Digital illustration — asteroid with Earth rising" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── EXPERIENCE ── -->
   <div id="experience">
     <div class="section">
@@ -1248,6 +1427,46 @@
 
     function galleryNav(dir) { goTo(cur + dir); }
     setInterval(() => galleryNav(1), 4500);
+
+    // BB-8 gallery
+    let bb8Cur = 0, bb8Total = 4;
+    const bb8Slides = document.getElementById('bb8Slides');
+    const bb8DotsEl = document.getElementById('bb8Dots');
+    if (bb8DotsEl) {
+      for (let i = 0; i < bb8Total; i++) {
+        const d = document.createElement('button');
+        d.className = 'fc-dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => goToBB8(i);
+        bb8DotsEl.appendChild(d);
+      }
+    }
+    function goToBB8(n) {
+      bb8Cur = (n + bb8Total) % bb8Total;
+      if (bb8Slides) bb8Slides.style.transform = `translateX(-${bb8Cur * 100}%)`;
+      document.querySelectorAll('#bb8Dots .fc-dot').forEach((d, i) => d.classList.toggle('active', i === bb8Cur));
+    }
+    function bb8Nav(dir) { goToBB8(bb8Cur + dir); }
+    setInterval(() => bb8Nav(1), 5000);
+
+    // Petalux gallery
+    let plxCur = 0, plxTotal = 2;
+    const plxSlides = document.getElementById('petaluxSlides');
+    const plxDotsEl = document.getElementById('petaluxDots');
+    if (plxDotsEl) {
+      for (let i = 0; i < plxTotal; i++) {
+        const d = document.createElement('button');
+        d.className = 'fc-dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => goToPlx(i);
+        plxDotsEl.appendChild(d);
+      }
+    }
+    function goToPlx(n) {
+      plxCur = (n + plxTotal) % plxTotal;
+      if (plxSlides) plxSlides.style.transform = `translateX(-${plxCur * 100}%)`;
+      document.querySelectorAll('#petaluxDots .fc-dot').forEach((d, i) => d.classList.toggle('active', i === plxCur));
+    }
+    function petaluxNav(dir) { goToPlx(plxCur + dir); }
+    setInterval(() => petaluxNav(1), 5500);
   </script>
 </body>
 </html>
