@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>jdl</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Suisse+Int%27l:wght@300;400&display=swap" rel="stylesheet">
-  <!-- fallback if Suisse isn't available -->
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -35,7 +33,7 @@
       cursor: none;
     }
 
-    /* ── CUSTOM CURSOR ── */
+    /* ── CURSOR ── */
     #cursor {
       position: fixed;
       width: 10px; height: 10px;
@@ -44,13 +42,10 @@
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%,-50%);
-      transition: transform 0.1s, width 0.25s, height 0.25s, background 0.25s;
+      transition: width 0.25s, height 0.25s;
       mix-blend-mode: difference;
     }
-
-    #cursor.grow {
-      width: 48px; height: 48px;
-    }
+    #cursor.grow { width: 48px; height: 48px; }
 
     /* ── NAV ── */
     nav {
@@ -64,7 +59,6 @@
     }
 
     .nav-logo {
-      font-family: var(--sans);
       font-size: 13px;
       font-weight: 400;
       color: var(--black);
@@ -75,11 +69,7 @@
       border-radius: 100px;
       transition: background 0.2s, color 0.2s;
     }
-
-    .nav-logo:hover {
-      background: var(--accent2);
-      color: var(--black);
-    }
+    .nav-logo:hover { background: var(--accent2); }
 
     .nav-links {
       display: flex;
@@ -87,7 +77,6 @@
       gap: 2.25rem;
       align-items: center;
     }
-
     .nav-links a {
       font-size: 13px;
       font-weight: 300;
@@ -96,14 +85,8 @@
       letter-spacing: 0.01em;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--white); }
-
-    .nav-links .nav-accent {
-      color: var(--accent2);
-      font-weight: 400;
-    }
-
+    .nav-links .nav-accent { color: var(--accent2); font-weight: 400; }
     .nav-links .nav-accent:hover { color: #f08040; }
 
     /* ── HERO ── */
@@ -126,37 +109,60 @@
       align-items: center;
       gap: 0.75rem;
     }
-
-    .eyebrow-line {
-      width: 32px;
-      height: 1px;
-      background: var(--dimmer);
-    }
+    .eyebrow-line { width: 32px; height: 1px; background: var(--dimmer); }
 
     .hero-headline {
-      font-family: var(--sans);
       font-size: clamp(3.5rem, 7.5vw, 7.5rem);
       font-weight: 300;
       line-height: 1.05;
       letter-spacing: -0.03em;
       color: var(--white);
-      max-width: 900px;
       margin-bottom: 5rem;
     }
 
-    /* ── PROJECT ROW (the .nitro style) ── */
+    .hero-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .hero-headline { margin-bottom: 0; }
+
+    .hero-tagline {
+      padding-bottom: 0.35rem;  /* align to headline baseline */
+    }
+
+    .hero-tagline-text {
+      font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      border-left: 1px solid var(--border2);
+      padding-left: 2rem;
+    }
+
+    .hero-tagline-text em {
+      font-style: italic;
+      font-family: 'Instrument Serif', serif;
+      color: var(--accent2);
+    }
+
+    /* ── PROJECT ROWS ── */
+    #proj-list { border-top: 1px solid var(--border2); }
+
     .proj-row {
       display: flex;
       align-items: stretch;
-      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
       cursor: none;
       text-decoration: none;
       color: inherit;
-      transition: background 0.2s;
       position: relative;
       overflow: hidden;
     }
-
     .proj-row::before {
       content: '';
       position: absolute;
@@ -167,10 +173,7 @@
       transition: transform 0.45s cubic-bezier(0.76,0,0.24,1);
       z-index: 0;
     }
-
     .proj-row:hover::before { transform: scaleX(1); }
-
-    .proj-row:last-of-type { border-bottom: 1px solid var(--border2); }
 
     .proj-row-inner {
       position: relative;
@@ -182,66 +185,50 @@
       padding: 1.5rem 0;
       gap: 2rem;
     }
-
     .proj-row-left {
       display: flex;
       align-items: baseline;
       gap: 1.5rem;
       flex: 1;
     }
-
     .proj-year {
       font-size: 11px;
       color: var(--dimmer);
       letter-spacing: 0.06em;
-      min-width: 36px;
+      min-width: 40px;
       flex-shrink: 0;
-      font-weight: 300;
     }
-
     .proj-name {
-      font-family: var(--sans);
       font-size: clamp(1.4rem, 3vw, 2.25rem);
       font-weight: 300;
       letter-spacing: -0.02em;
       color: var(--white);
       line-height: 1;
-      transition: color 0.2s;
     }
-
-    .proj-row:hover .proj-name { color: var(--white); }
-
     .proj-row-right {
       display: flex;
       align-items: center;
       gap: 2rem;
       flex-shrink: 0;
     }
-
     .proj-type {
       font-size: 11px;
       color: var(--dim);
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      font-weight: 300;
     }
-
     .proj-arrow {
       font-size: 1.4rem;
       color: var(--white);
-      line-height: 1;
-      transform: rotate(0deg);
       transition: transform 0.3s;
     }
-
     .proj-row:hover .proj-arrow { transform: rotate(-45deg); }
 
-    /* Preview image on hover */
+    /* Cursor preview */
     .proj-preview {
       position: fixed;
-      width: 320px;
-      height: 200px;
-      border-radius: 8px;
+      width: 320px; height: 200px;
+      border-radius: 6px;
       overflow: hidden;
       pointer-events: none;
       z-index: 50;
@@ -249,17 +236,8 @@
       transform: scale(0.92) rotate(-2deg);
       transition: opacity 0.3s, transform 0.3s;
     }
-
-    .proj-preview img, .proj-preview .preview-gradient {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .proj-preview.visible {
-      opacity: 1;
-      transform: scale(1) rotate(-1deg);
-    }
+    .proj-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .proj-preview.visible { opacity: 1; transform: scale(1) rotate(-1deg); }
 
     /* ── SECTION WRAPPER ── */
     .section {
@@ -267,7 +245,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .section-label {
       font-size: 11px;
       font-weight: 300;
@@ -279,7 +256,6 @@
       align-items: center;
       gap: 0.75rem;
     }
-
     .section-label::before {
       content: '';
       display: block;
@@ -287,18 +263,200 @@
       background: var(--dimmer);
     }
 
-    /* ── ABOUT ── */
-    #about {
+    /* ── PROJECT CAROUSEL SECTION ── */
+    .proj-section {
       border-top: 1px solid var(--border);
     }
 
+    .proj-section-inner {
+      padding: 5rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Top meta row */
+    .proj-meta-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      gap: 2rem;
+    }
+    .proj-meta-left { display: flex; align-items: baseline; gap: 1.25rem; }
+    .proj-section-year {
+      font-size: 11px;
+      color: var(--dimmer);
+      letter-spacing: 0.08em;
+    }
+    .proj-section-title {
+      font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      color: var(--white);
+    }
+    .proj-section-type {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }
+
+    /* Carousel */
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #1a1a1a;
+      margin-bottom: 0;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.76,0,0.24,1);
+    }
+    .carousel-slide {
+      min-width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    .carousel-slide-placeholder {
+      min-width: 100%;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(242,240,235,0.04);
+      color: var(--dimmer);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* CAD/render slides: dark bg, contain so nothing is cropped */
+    .carousel-slide-contain {
+      min-width: 100%;
+      height: 520px;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      flex-shrink: 0;
+      background: #181818;
+      padding: 2rem;
+    }
+
+    /* Carousel controls */
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.25rem;
+    }
+    .carousel-dots { display: flex; gap: 6px; }
+    .carousel-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--dimmer);
+      border: none; cursor: none; padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active { background: var(--white); transform: scale(1.4); }
+    .carousel-arrows { display: flex; gap: 0.5rem; }
+    .carousel-arrow {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--dim);
+      width: 36px; height: 36px;
+      border-radius: 2px;
+      cursor: none;
+      font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .carousel-arrow:hover { border-color: var(--white); color: var(--white); }
+
+    /* Description + tags below carousel */
+    .proj-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .proj-desc {
+      font-size: 15px;
+      color: var(--dim);
+      line-height: 1.8;
+    }
+    .proj-desc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent2);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.5); opacity:0.5; }
+    }
+    .proj-desc p { margin-bottom: 0; }
+
+    .proj-sidebar {}
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .proj-tag {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--border2);
+      color: var(--dim);
+      border-radius: 2px;
+    }
+    .proj-details {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+    .proj-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+      font-size: 13px;
+    }
+    .proj-detail-key {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dimmer);
+      flex-shrink: 0;
+    }
+    .proj-detail-val { color: var(--dim); text-align: right; }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--border); }
+
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 280px 1fr;
+      grid-template-columns: 1fr 260px 1fr;
       gap: 4rem;
       align-items: start;
     }
-
     .about-portrait {
       position: sticky;
       top: 6rem;
@@ -306,96 +464,65 @@
       overflow: hidden;
       aspect-ratio: 3/4;
     }
-
     .about-portrait img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
       filter: grayscale(20%);
       transition: filter 0.4s;
     }
-
-    .about-portrait:hover img {
-      filter: grayscale(0%);
-    }
+    .about-portrait:hover img { filter: grayscale(0%); }
 
     .about-statement {
-      font-family: var(--sans);
-      font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
       font-weight: 300;
       letter-spacing: -0.025em;
-      line-height: 1.3;
+      line-height: 1.35;
       color: var(--white);
       margin-bottom: 2rem;
     }
-
     .about-statement em {
       font-style: italic;
       color: var(--accent2);
       font-family: 'Instrument Serif', serif;
     }
+    .about-body { font-size: 15px; color: var(--dim); line-height: 1.8; }
 
-    .about-body {
-      font-size: 15px;
-      color: var(--dim);
-      line-height: 1.8;
-    }
-
-    .about-details {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--border);
-    }
-
+    .about-details { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
     .detail-row {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 1.1rem 0;
+      padding: 1rem 0;
       border-bottom: 1px solid var(--border);
       gap: 1rem;
     }
-
     .detail-key {
-      font-size: 11px;
-      letter-spacing: 0.08em;
+      font-size: 10px;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--dimmer);
-      font-weight: 300;
       flex-shrink: 0;
     }
-
-    .detail-val {
-      font-size: 14px;
-      color: var(--white);
-      text-align: right;
-    }
+    .detail-val { font-size: 13.5px; color: var(--white); text-align: right; }
 
     /* ── SKILLS ── */
     #skills { border-top: 1px solid var(--border); }
-
     .skills-list {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
       border-top: 1px solid var(--border);
     }
-
     .skill-block {
-      padding: 2rem 0 2rem 0;
+      padding: 1.75rem 2rem;
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 1.75rem 2rem;
       transition: background 0.2s;
     }
-
     .skill-block:nth-child(3n) { border-right: none; }
     .skill-block:nth-last-child(-n+3) { border-bottom: none; }
-
     .skill-block:hover { background: rgba(242,240,235,0.03); }
-
     .skill-cat {
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -404,217 +531,14 @@
       margin-bottom: 1rem;
       font-weight: 400;
     }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-tag {
-      font-size: 13px;
-      color: var(--dim);
-      font-weight: 300;
-    }
-
-    .skill-tag::after {
-      content: '·';
-      margin-left: 0.5rem;
-      color: var(--dimmer);
-    }
-
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { font-size: 13px; color: var(--dim); }
+    .skill-tag::after { content: '·'; margin-left: 0.5rem; color: var(--dimmer); }
     .skill-tag:last-child::after { content: ''; }
 
-    /* ── FEATURED PROJECT (di carlo) ── */
-    #featured { border-top: 1px solid var(--border); }
-
-    .featured-card {
-      border: 1px solid var(--border2);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .fc-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .fc-gallery {
-      position: relative;
-      overflow: hidden;
-      background: #1a1a1a;
-      min-height: 360px;
-    }
-
-    .fc-slides {
-      display: flex;
-      height: 100%;
-      transition: transform 0.6s cubic-bezier(0.76,0,0.24,1);
-    }
-
-    .fc-slide {
-      min-width: 100%;
-      height: 360px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .fc-arrow {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      background: rgba(13,13,13,0.7);
-      border: 1px solid var(--border2);
-      color: var(--white);
-      width: 36px; height: 36px;
-      border-radius: 2px;
-      cursor: none;
-      font-size: 16px;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 2;
-      transition: background 0.2s;
-    }
-
-    .fc-arrow:hover { background: rgba(13,13,13,0.95); }
-    .fc-arrow.prev { left: 12px; }
-    .fc-arrow.next { right: 12px; }
-
-    .fc-dots {
-      position: absolute;
-      bottom: 14px; left: 50%;
-      transform: translateX(-50%);
-      display: flex; gap: 6px; z-index: 2;
-    }
-
-    .fc-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: rgba(242,240,235,0.3);
-      border: none; cursor: none; padding: 0;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .fc-dot.active { background: var(--white); transform: scale(1.4); }
-
-    .fc-info {
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: rgba(242,240,235,0.03);
-    }
-
-    .fc-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-
-    .fc-badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent2);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%,100%{ transform:scale(1); opacity:1; }
-      50%{ transform:scale(1.5); opacity:0.5; }
-    }
-
-    .fc-info h3 {
-      font-family: var(--sans);
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 300;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-
-    .fc-org { font-size: 13px; color: var(--accent2); margin-bottom: 1.25rem; }
-
-    .fc-desc {
-      font-size: 14px;
-      color: var(--dim);
-      line-height: 1.75;
-      flex: 1;
-      margin-bottom: 1.5rem;
-    }
-
-    .fc-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-
-    .fc-tag {
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      padding: 0.25rem 0.7rem;
-      border: 1px solid var(--border2);
-      color: var(--dim);
-      border-radius: 2px;
-    }
-
-    .fc-link {
-      font-size: 13px;
-      color: var(--dim);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border2);
-      padding-bottom: 2px;
-      width: fit-content;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .fc-link:hover { color: var(--white); border-color: var(--white); }
-
-    .fc-bottom {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--border);
-    }
-
-    .fc-contrib {
-      padding: 1.5rem 2rem;
-      border-right: 1px solid var(--border);
-    }
-
-    .fc-contrib:last-child { border-right: none; }
-
-    .fc-contrib-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--dimmer);
-      margin-bottom: 0.5rem;
-    }
-
-    .fc-contrib-title {
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.4rem;
-    }
-
-    .fc-contrib-desc {
-      font-size: 12.5px;
-      color: var(--dim);
-      line-height: 1.6;
-    }
-
-    /* ── TIMELINE ── */
+    /* ── EXPERIENCE ── */
     #experience { border-top: 1px solid var(--border); }
-
-    .exp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-    }
-
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
     .exp-col-label {
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -622,64 +546,42 @@
       color: var(--dimmer);
       margin-bottom: 2rem;
     }
-
     .tl { display: flex; flex-direction: column; }
-
     .tl-item {
       display: flex;
       gap: 1.5rem;
       border-top: 1px solid var(--border);
       padding: 1.5rem 0;
     }
-
     .tl-item:last-child { border-bottom: 1px solid var(--border); }
-
-    .tl-num {
-      font-size: 11px;
-      color: var(--dimmer);
-      min-width: 20px;
-      padding-top: 3px;
-      flex-shrink: 0;
-    }
-
-    .tl-content {}
-
-    .tl-date {
-      font-size: 11px;
-      color: var(--dimmer);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.25rem;
-    }
-
-    .tl-title {
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--white);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.2rem;
-    }
-
+    .tl-num { font-size: 11px; color: var(--dimmer); min-width: 20px; padding-top: 3px; flex-shrink: 0; }
+    .tl-date { font-size: 11px; color: var(--dimmer); margin-bottom: 0.25rem; }
+    .tl-title { font-size: 1rem; font-weight: 400; color: var(--white); margin-bottom: 0.2rem; }
     .tl-org { font-size: 12px; color: var(--accent2); margin-bottom: 0.5rem; }
     .tl-org-sage { color: #6aaa72; }
     .tl-org-gold { color: #c4a040; }
-
     .tl-desc { font-size: 13px; color: var(--dim); line-height: 1.65; }
 
+    /* ── ARTWORK ── */
+    #artwork { border-top: 1px solid var(--border); }
+    .artwork-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1.6fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .art-card { border-radius: 4px; overflow: hidden; background: #1a1a1a; }
+    .art-card img {
+      width: 100%; display: block;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), filter 0.4s;
+      filter: grayscale(15%);
+    }
+    .art-card:hover img { transform: scale(1.03); filter: grayscale(0%); }
+
     /* ── CONTACT ── */
-    #contact {
-      border-top: 1px solid var(--border);
-      background: var(--ink);
-    }
-
-    .contact-section {
-      padding: 6rem 2.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
+    #contact { border-top: 1px solid var(--border); background: var(--ink); }
+    .contact-section { padding: 6rem 2.5rem; max-width: 1200px; margin: 0 auto; }
     .contact-heading {
-      font-family: var(--sans);
       font-size: clamp(3rem, 6vw, 6rem);
       font-weight: 300;
       letter-spacing: -0.04em;
@@ -688,19 +590,8 @@
       margin-bottom: 4rem;
       max-width: 700px;
     }
-
-    .contact-heading em {
-      font-style: italic;
-      font-family: 'Instrument Serif', serif;
-      color: var(--accent2);
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--border2);
-    }
-
+    .contact-heading em { font-style: italic; font-family: 'Instrument Serif', serif; color: var(--accent2); }
+    .contact-links { display: flex; flex-direction: column; border-top: 1px solid var(--border2); }
     .cl {
       display: flex;
       align-items: center;
@@ -713,15 +604,8 @@
       transition: color 0.2s;
       cursor: none;
     }
-
     .cl:hover { color: var(--white); }
-
-    .cl-arrow {
-      font-size: 1rem;
-      transform: rotate(0deg);
-      transition: transform 0.25s;
-    }
-
+    .cl-arrow { font-size: 1rem; transition: transform 0.25s; }
     .cl:hover .cl-arrow { transform: rotate(-45deg); }
 
     /* ── FOOTER ── */
@@ -733,43 +617,7 @@
       justify-content: space-between;
       background: var(--ink);
     }
-
-    footer span {
-      font-size: 12px;
-      color: var(--dimmer);
-      letter-spacing: 0.04em;
-    }
-
-    /* ── ARTWORK GRID ── */
-    .artwork-grid {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1.6fr;
-      gap: 10px;
-      align-items: start;
-    }
-
-    .art-card {
-      border-radius: 4px;
-      overflow: hidden;
-      background: #1a1a1a;
-    }
-
-    .art-card img {
-      width: 100%;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), filter 0.4s;
-      filter: grayscale(15%);
-    }
-
-    .art-card:hover img {
-      transform: scale(1.03);
-      filter: grayscale(0%);
-    }
-
-    .art-card-tall img {
-      height: 100%;
-      object-fit: cover;
-    }
+    footer span { font-size: 12px; color: var(--dimmer); letter-spacing: 0.04em; }
 
     /* ── FADE UP ── */
     .fade-up {
@@ -777,28 +625,23 @@
       transform: translateY(18px);
       transition: opacity 0.65s ease, transform 0.65s ease;
     }
-
     .fade-up.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       nav { padding: 1.25rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      #hero { padding: 0 1.5rem 3.5rem; }
-      .section { padding: 4rem 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      #hero, .section, .proj-section-inner, .contact-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero-top { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-tagline-text { border-left: none; padding-left: 0; border-top: 1px solid var(--border2); padding-top: 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-portrait { position: static; aspect-ratio: 4/3; max-height: 320px; }
+      .about-portrait { position: static; aspect-ratio: 4/3; max-height: 300px; }
       .skills-list { grid-template-columns: 1fr 1fr; }
-      .fc-bottom { grid-template-columns: 1fr; }
-      .fc-contrib { border-right: none; border-bottom: 1px solid var(--border); }
-      .fc-contrib:last-child { border-bottom: none; }
-      .fc-gallery { min-height: 240px; }
-      .fc-slide { height: 240px; }
-      .artwork-grid { grid-template-columns: 1fr; }
-      .fc-top { grid-template-columns: 1fr; }
       .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .contact-section { padding: 4rem 1.5rem; }
-      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .proj-body { grid-template-columns: 1fr; gap: 2rem; }
+      .carousel-slide, .carousel-slide-placeholder, .carousel-slide-contain { height: 260px; }
+      .carousel-slide-contain { padding: 1rem; }
+      .artwork-grid { grid-template-columns: 1fr; }
       body { cursor: auto; }
       #cursor { display: none; }
     }
@@ -807,20 +650,16 @@
 <body>
 
   <div id="cursor"></div>
-
-  <!-- hover preview card (follows cursor) -->
-  <div class="proj-preview" id="projPreview">
-    <div id="projPreviewInner"></div>
-  </div>
+  <div class="proj-preview" id="projPreview"><div id="projPreviewInner"></div></div>
 
   <!-- ── NAV ── -->
   <nav>
     <a href="#hero" class="nav-logo">.jdl</a>
     <ul class="nav-links">
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#artwork">artwork</a></li>
       <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
       <li><a href="#experience">experience</a></li>
+      <li><a href="#artwork">artwork</a></li>
       <li><a href="#contact">contact</a></li>
       <li><a href="JeremyDeLeon_Resume.pdf" target="_blank" class="nav-accent">resume ↗</a></li>
     </ul>
@@ -832,192 +671,116 @@
       <div class="eyebrow-line"></div>
       mechanical engineer · artist
     </div>
-    <h1 class="hero-headline fade-up">
-      hi i'm jeremy,<br>
-      thanks for stopping by
-    </h1>
-
-    <!-- Project rows (the .nitro-style list) -->
-    <div id="projects">
-      <a class="proj-row fade-up"
-         href="#featured"
-         data-preview="dicarlo_cad.png">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2026</span>
-            <span class="proj-name">ebot bio — ai benchtop robot</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">Research · Di Carlo Lab</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#about"
-         data-preview="bb8_build.jpg">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2025</span>
-            <span class="proj-name">bruin bb-8</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">Mechanical Design</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#petalux-detail"
-         data-preview="petalux_petal.jpg">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2026</span>
-            <span class="proj-name">petalux — motorized flower lamp</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">Mechatronics · Creative Labs</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#about"
-         data-preview="bb8_sphere.jpg">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2024</span>
-            <span class="proj-name">hybrid rocket</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">Aerospace · Rocket Project</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#about"
-         data-preview="jeremy_portrait.jpeg">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2024</span>
-            <span class="proj-name">bionic hand</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">Assistive Tech · Design</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#about">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2024</span>
-            <span class="proj-name">ant colony simulation</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">MATLAB · Simulation</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#about">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">2024</span>
-            <span class="proj-name">automated pill dispenser</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">SolidWorks · DFM</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="proj-row fade-up"
-         href="#artwork"
-         data-preview="art_blue.jpg">
-        <div class="proj-row-inner">
-          <div class="proj-row-left">
-            <span class="proj-year">ongoing</span>
-            <span class="proj-name">artwork</span>
-          </div>
-          <div class="proj-row-right">
-            <span class="proj-type">Painting · Drawing · Digital</span>
-            <span class="proj-arrow">→</span>
-          </div>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ── FEATURED DEEP-DIVE ── -->
-  <div id="featured" style="border-top: 1px solid var(--border);">
-    <div class="section">
-      <div class="section-label fade-up">featured project</div>
-      <div class="featured-card fade-up">
-        <div class="fc-top">
-          <div class="fc-gallery">
-            <div class="fc-slides" id="gallerySlides">
-              <img class="fc-slide" src="dicarlo_cad.png"       alt="Exploded CAD — Toolhead Exchange Mechanism" />
-              <img class="fc-slide" src="dicarlo_part.jpeg"     alt="CNC-machined aluminum flanged housing" />
-              <img class="fc-slide" src="dicarlo_machining.gif" alt="CNC machining in action" />
-              <img class="fc-slide" src="dicarlo_tools.jpeg"    alt="12-tool setup on Haas Mini Mill rack" />
-              <img class="fc-slide" src="dicarlo_cnc.jpeg"      alt="Haas Mini Mill — UCLA machine shop" />
-            </div>
-            <button class="fc-arrow prev" onclick="galleryNav(-1)">&#8249;</button>
-            <button class="fc-arrow next" onclick="galleryNav(1)">&#8250;</button>
-            <div class="fc-dots" id="galleryDots"></div>
-          </div>
-          <div class="fc-info">
-            <div>
-              <div class="fc-badge"><div class="fc-badge-dot"></div>live research · jan 2026 – present</div>
-              <h3>eBOT Bio Toolhead<br>Exchange Mechanism</h3>
-              <div class="fc-org">UCLA Di Carlo Lab — Undergraduate Researcher</div>
-              <p class="fc-desc">
-                Designed and manufactured a modular toolhead exchange system for a benchtop bioassay robot — miniaturizing and automating full microfluidic workflows driven by LLM integration. Every structural component was machined in-house on Haas CNC mills and lathes from 6061-T6 aluminum and stainless steel.
-              </p>
-              <div class="fc-tags">
-                <span class="fc-tag">Fusion 360</span>
-                <span class="fc-tag">GD&T</span>
-                <span class="fc-tag">CNC Milling</span>
-                <span class="fc-tag">Manual Lathe</span>
-                <span class="fc-tag">6061-T6 Al</span>
-                <span class="fc-tag">Stainless Steel</span>
-                <span class="fc-tag">3D Printing</span>
-              </div>
-            </div>
-            <a href="https://www.dicarlolaboratory.com/" target="_blank" class="fc-link">Di Carlo Lab ↗</a>
-          </div>
-        </div>
-        <div class="fc-bottom">
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Mechanism Design</div>
-            <div class="fc-contrib-title">3-Axis Toolhead Articulation</div>
-            <div class="fc-contrib-desc">253mm radial distance with ±0.25mm inner / ±0.75mm outer tolerances. Press-fit magnet + dowel-spring preload for repeatable dynamic loading.</div>
-          </div>
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Manufacturing</div>
-            <div class="fc-contrib-title">Haas CNC · Lathe · Manual Mill</div>
-            <div class="fc-contrib-desc">Programmed 12-tool setups across roughing and finishing passes to produce the flanged aluminum housing and custom frame components.</div>
-          </div>
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Tolerance & Assembly</div>
-            <div class="fc-contrib-title">GD&T — Mixed-Material Fit</div>
-            <div class="fc-contrib-desc">Resolved tolerance stack-up and alignment between 3D-printed PLA and machined stainless steel without secondary fitting operations.</div>
-          </div>
-        </div>
+    <div class="hero-top">
+      <h1 class="hero-headline fade-up">
+        hi, i'm jeremy,<br>
+        thanks for stopping by.
+      </h1>
+      <div class="hero-tagline fade-up">
+        <p class="hero-tagline-text">
+          mechanical engineer, roboticist, and artist<br>
+          designing machines that move with<br>
+          <em>precision, purpose, and personality.</em>
+        </p>
       </div>
     </div>
-  </div>
+
+    <!-- ── PROJECT LIST ── -->
+    <div id="projects">
+      <div id="proj-list">
+        <a class="proj-row fade-up" href="#proj-dicarlo" data-preview="dicarlo_machining.gif">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2026</span>
+              <span class="proj-name">ebot bio — ai benchtop robot</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">Research · Di Carlo Lab</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-row fade-up" href="#proj-bb8" data-preview="bb8_build.jpg">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2025</span>
+              <span class="proj-name">bruin bb-8</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">Robotics · X1 Robotics</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-row fade-up" href="#proj-petalux" data-preview="petalux_petal.jpg">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2026</span>
+              <span class="proj-name">petalux — motorized flower lamp</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">Mechatronics · Creative Labs</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-row fade-up" href="#proj-rocket" data-preview="bb8_sphere.jpg">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2024</span>
+              <span class="proj-name">hybrid rocket</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">Aerospace · Rocket Project</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-row fade-up" href="#proj-bionic" data-preview="jeremy_portrait.jpeg">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2024</span>
+              <span class="proj-name">bionic hand</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">Assistive Tech · Design</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-row fade-up" href="#proj-ant">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2024</span>
+              <span class="proj-name">ant colony simulation</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">MATLAB · Simulation</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="proj-row fade-up" href="#proj-pill">
+          <div class="proj-row-inner">
+            <div class="proj-row-left">
+              <span class="proj-year">2024</span>
+              <span class="proj-name">automated pill dispenser</span>
+            </div>
+            <div class="proj-row-right">
+              <span class="proj-type">SolidWorks · DFM</span>
+              <span class="proj-arrow">→</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- ── ABOUT ── -->
   <div id="about">
@@ -1059,7 +822,403 @@
           </div>
           <div class="detail-row">
             <span class="detail-key">Status</span>
-            <span class="detail-val" style="color: var(--accent2);">open to internships — 2026</span>
+            <span class="detail-val" style="color:var(--accent2);">open to internships — 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       PROJECT CAROUSELS
+  ════════════════════════════════════ -->
+
+  <!-- ── 1. DI CARLO LAB ── -->
+  <div id="proj-dicarlo" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2026</span>
+          <h2 class="proj-section-title">ebot bio — ai benchtop robot</h2>
+        </div>
+        <span class="proj-section-type">Research · Di Carlo Lab</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-dicarlo">
+          <img class="carousel-slide" src="dicarlo_machining.gif" alt="CNC machining in action" />
+          <img class="carousel-slide-contain" src="dicarlo_cad_nobg.png" alt="Exploded CAD — toolhead exchange mechanism" />
+          <img class="carousel-slide" src="dicarlo_part_crop.jpeg"  alt="CNC-machined aluminum flanged housing" />
+          <img class="carousel-slide" src="dicarlo_tools_crop.jpeg" alt="12-tool setup on Haas Mini Mill" />
+          <img class="carousel-slide" src="dicarlo_cnc_crop.jpeg"   alt="Haas Mini Mill — UCLA machine shop" />
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-dicarlo"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('dicarlo',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('dicarlo', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge"><div class="badge-dot"></div>live research · jan 2026 – present</div>
+          <p>Designed and manufactured a modular toolhead exchange system for a benchtop bioassay robot integrating LLM-driven automation — miniaturizing and automating full microfluidic workflows. All structural components were machined in-house on Haas CNC mills and lathes from 6061-T6 aluminum and stainless steel.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">Fusion 360</span>
+            <span class="proj-tag">GD&amp;T</span>
+            <span class="proj-tag">CNC Milling</span>
+            <span class="proj-tag">Manual Lathe</span>
+            <span class="proj-tag">6061-T6 Al</span>
+            <span class="proj-tag">Stainless Steel</span>
+            <span class="proj-tag">3D Printing</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Role</span>
+              <span class="proj-detail-val">Undergraduate Researcher — CAD &amp; Manufacturing</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Lab</span>
+              <span class="proj-detail-val">UCLA Di Carlo Lab</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Key Spec</span>
+              <span class="proj-detail-val">±0.25mm inner / ±0.75mm outer tolerances</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. BRUIN BB-8 ── -->
+  <div id="proj-bb8" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2025</span>
+          <h2 class="proj-section-title">bruin bb-8</h2>
+        </div>
+        <span class="proj-section-type">Robotics · X1 Robotics / ASME</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-bb8">
+          <img class="carousel-slide" src="bb8_build.jpg"   alt="Bruin BB-8 physical build" />
+          <img class="carousel-slide" src="bb8_cad.jpg"     alt="BB-8 internal drivetrain CAD" />
+          <img class="carousel-slide" src="bb8_sphere.jpg"  alt="BB-8 full sphere CAD render" />
+          <img class="carousel-slide" src="bb8_diagram.jpg" alt="BB-8 full assembly diagram" />
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-bb8"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('bb8',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('bb8', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge"><div class="badge-dot"></div>sept 2025 – present</div>
+          <p>Designed an internal articulation arm for a holonomic spherical robot inspired by BB-8. The robot uses omni-wheels for holonomic movement inside the shell, with a magnetically-attached head actuated by the internal arm. Validated structural integrity of 6061-T6 aluminum components via FEA with a 1.5–2× factor of safety before manufacturing.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">SolidWorks</span>
+            <span class="proj-tag">FEA</span>
+            <span class="proj-tag">6061-T6 Al</span>
+            <span class="proj-tag">GD&amp;T</span>
+            <span class="proj-tag">Holonomic Drive</span>
+            <span class="proj-tag">Magnetic Coupling</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Role</span>
+              <span class="proj-detail-val">Mechanical Engineer</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Org</span>
+              <span class="proj-detail-val">ASME UCLA · X1 Robotics</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Key Spec</span>
+              <span class="proj-detail-val">253mm radial distance · ±0.25mm tolerance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. PETALUX ── -->
+  <div id="proj-petalux" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2026</span>
+          <h2 class="proj-section-title">petalux — motorized flower lamp</h2>
+        </div>
+        <span class="proj-section-type">Mechatronics · Creative Labs</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-petalux">
+          <img class="carousel-slide" src="petalux_petal.jpg"      alt="Petalux petal mechanism — Fusion 360, 20° petal angle" />
+          <img class="carousel-slide" src="petalux_components.jpg" alt="Petalux full assembly, components, and physical prototype" />
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-petalux"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('petalux',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('petalux', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge"><div class="badge-dot"></div>apr 2026 – present</div>
+          <p>An interactive lamp with servo-actuated petals that open and close on command. As project lead, coordinated mechanical, electrical, and software subteams. Designed and iterated the petal linkage mechanism in Fusion 360 — including a threaded lead screw, petal bracket, and motor mount — and oversaw embedded Arduino control with mobile map integration.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">Fusion 360</span>
+            <span class="proj-tag">Arduino IDE</span>
+            <span class="proj-tag">Servo Actuation</span>
+            <span class="proj-tag">3D Printing</span>
+            <span class="proj-tag">Embedded Control</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Role</span>
+              <span class="proj-detail-val">Project Lead</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Org</span>
+              <span class="proj-detail-val">UCLA Creative Labs</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Mechanism</span>
+              <span class="proj-detail-val">Lead screw · 20° petal actuation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. HYBRID ROCKET ── -->
+  <div id="proj-rocket" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2024</span>
+          <h2 class="proj-section-title">hybrid rocket</h2>
+        </div>
+        <span class="proj-section-type">Aerospace · Rocket Project</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-rocket">
+          <div class="carousel-slide-placeholder">photos coming soon</div>
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-rocket"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('rocket',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('rocket', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge">sept 2024 – june 2025</div>
+          <p>Designed a 3-section carbon fiber body tube layup with ±45°/0° plies and reinforced bolted-joint regions. Manufactured plywood engine centering rings via laser-cut ¼" laminations epoxied into ½" structural rings — achieving strong buckling, bending, and thrust-alignment margins for the hybrid rocket airframe.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">Carbon Fiber</span>
+            <span class="proj-tag">Composite Layup</span>
+            <span class="proj-tag">Laser Cutting</span>
+            <span class="proj-tag">Structural Analysis</span>
+            <span class="proj-tag">Epoxy Bonding</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Role</span>
+              <span class="proj-detail-val">Mechanical Engineer</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Org</span>
+              <span class="proj-detail-val">UCLA Rocket Project</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Construction</span>
+              <span class="proj-detail-val">CF layup · ±45°/0° plies · 3-section body</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. BIONIC HAND ── -->
+  <div id="proj-bionic" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2024</span>
+          <h2 class="proj-section-title">bionic hand</h2>
+        </div>
+        <span class="proj-section-type">Assistive Tech · Design</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-bionic">
+          <div class="carousel-slide-placeholder">photos coming soon</div>
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-bionic"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('bionic',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('bionic', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge">2024</div>
+          <p>Led the mechanical design of a bionic hand prototype in Onshape. Designed multi-part assemblies for finger actuation and supported Arduino-based servo control integration for a functional assistive-device demonstration.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">Onshape</span>
+            <span class="proj-tag">Arduino IDE</span>
+            <span class="proj-tag">Servo Control</span>
+            <span class="proj-tag">3D Printing</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Role</span>
+              <span class="proj-detail-val">Mechanical Design Lead</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Software</span>
+              <span class="proj-detail-val">Onshape · Arduino IDE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. ANT COLONY ── -->
+  <div id="proj-ant" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2024</span>
+          <h2 class="proj-section-title">ant colony simulation</h2>
+        </div>
+        <span class="proj-section-type">MATLAB · Simulation</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-ant">
+          <div class="carousel-slide-placeholder">screenshots coming soon</div>
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-ant"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('ant',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('ant', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge">2024</div>
+          <p>Built a probabilistic multi-agent simulation in MATLAB across 8 modular functions. Implemented concentration-weighted pheromone gradient steering, stochastic angle updates drawn from N(0,σ), and linear pheromone decay to produce emergent shortest-path discovery across the agent population.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">MATLAB</span>
+            <span class="proj-tag">Multi-Agent Sim</span>
+            <span class="proj-tag">Probabilistic Modeling</span>
+            <span class="proj-tag">Emergent Behavior</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Language</span>
+              <span class="proj-detail-val">MATLAB — 8 modular functions</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Method</span>
+              <span class="proj-detail-val">Pheromone gradient · stochastic N(0,σ)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. PILL DISPENSER ── -->
+  <div id="proj-pill" class="proj-section">
+    <div class="proj-section-inner">
+      <div class="proj-meta-row fade-up">
+        <div class="proj-meta-left">
+          <span class="proj-section-year">2024</span>
+          <h2 class="proj-section-title">automated pill dispenser</h2>
+        </div>
+        <span class="proj-section-type">SolidWorks · DFM</span>
+      </div>
+
+      <div class="carousel-wrap fade-up">
+        <div class="carousel-track" id="track-pill">
+          <div class="carousel-slide-placeholder">renders coming soon</div>
+        </div>
+      </div>
+      <div class="carousel-controls fade-up">
+        <div class="carousel-dots" id="dots-pill"></div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="carNav('pill',-1)">&#8249;</button>
+          <button class="carousel-arrow" onclick="carNav('pill', 1)">&#8250;</button>
+        </div>
+      </div>
+
+      <div class="proj-body fade-up">
+        <div class="proj-desc">
+          <div class="proj-desc-badge">2024</div>
+          <p>Designed a 15-part SolidWorks assembly for a dual-hopper pill dispenser in PLA. Applied DFM constraints across variable pill geometries, delivering a compact 22.5×7.5cm footprint optimized for 3D printability with no support-heavy features.</p>
+        </div>
+        <div class="proj-sidebar">
+          <div class="proj-tags">
+            <span class="proj-tag">SolidWorks</span>
+            <span class="proj-tag">DFM</span>
+            <span class="proj-tag">PLA</span>
+            <span class="proj-tag">3D Printing</span>
+          </div>
+          <div class="proj-details">
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Parts</span>
+              <span class="proj-detail-val">15-part assembly</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Footprint</span>
+              <span class="proj-detail-val">22.5 × 7.5 cm</span>
+            </div>
+            <div class="proj-detail-row">
+              <span class="proj-detail-key">Method</span>
+              <span class="proj-detail-val">Dual-hopper · DFM optimized</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1067,197 +1226,45 @@
   </div>
 
   <!-- ── SKILLS ── -->
-  <div id="skills-section" style="border-top: 1px solid var(--border);">
+  <div id="skills" style="border-top: 1px solid var(--border);">
     <div class="section">
-      <div class="section-label fade-up">skills & tools</div>
+      <div class="section-label fade-up">skills &amp; tools</div>
       <div class="skills-list fade-up">
         <div class="skill-block">
-          <div class="skill-cat">CAD & Modeling</div>
+          <div class="skill-cat">CAD &amp; Modeling</div>
           <div class="skill-tags">
-            <span class="skill-tag">Fusion 360</span>
-            <span class="skill-tag">SolidWorks</span>
-            <span class="skill-tag">Onshape</span>
-            <span class="skill-tag">AutoCAD</span>
-            <span class="skill-tag">Revit</span>
+            <span class="skill-tag">Fusion 360</span><span class="skill-tag">SolidWorks</span><span class="skill-tag">Onshape</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">Revit</span>
           </div>
         </div>
         <div class="skill-block">
           <div class="skill-cat">Analysis</div>
           <div class="skill-tags">
-            <span class="skill-tag">FEA</span>
-            <span class="skill-tag">ANSYS</span>
-            <span class="skill-tag">CFD</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">Simulink</span>
+            <span class="skill-tag">FEA</span><span class="skill-tag">ANSYS</span><span class="skill-tag">CFD</span><span class="skill-tag">MATLAB</span>
           </div>
         </div>
         <div class="skill-block">
           <div class="skill-cat">Manufacturing</div>
           <div class="skill-tags">
-            <span class="skill-tag">CNC Milling</span>
-            <span class="skill-tag">Manual Lathe</span>
-            <span class="skill-tag">3D Printing</span>
-            <span class="skill-tag">Laser Cutting</span>
-            <span class="skill-tag">Carbon Fiber Layup</span>
+            <span class="skill-tag">CNC Milling</span><span class="skill-tag">Manual Lathe</span><span class="skill-tag">3D Printing</span><span class="skill-tag">Laser Cutting</span><span class="skill-tag">CF Layup</span>
           </div>
         </div>
         <div class="skill-block">
           <div class="skill-cat">Engineering Methods</div>
           <div class="skill-tags">
-            <span class="skill-tag">GD&T</span>
-            <span class="skill-tag">FMEA</span>
-            <span class="skill-tag">DFM / DFA</span>
-            <span class="skill-tag">Rapid Prototyping</span>
+            <span class="skill-tag">GD&amp;T</span><span class="skill-tag">FMEA</span><span class="skill-tag">DFM/DFA</span><span class="skill-tag">Rapid Prototyping</span>
           </div>
         </div>
         <div class="skill-block">
           <div class="skill-cat">Programming</div>
           <div class="skill-tags">
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">C++</span>
-            <span class="skill-tag">Arduino IDE</span>
-            <span class="skill-tag">Git</span>
+            <span class="skill-tag">MATLAB</span><span class="skill-tag">Python</span><span class="skill-tag">C++</span><span class="skill-tag">Arduino IDE</span><span class="skill-tag">Git</span>
           </div>
         </div>
         <div class="skill-block">
           <div class="skill-cat">Fundamentals</div>
           <div class="skill-tags">
-            <span class="skill-tag">Thermodynamics</span>
-            <span class="skill-tag">Fluid Mechanics</span>
-            <span class="skill-tag">Dynamics</span>
-            <span class="skill-tag">Strength of Materials</span>
-            <span class="skill-tag">Mechanisms</span>
+            <span class="skill-tag">Thermodynamics</span><span class="skill-tag">Fluid Mechanics</span><span class="skill-tag">Dynamics</span><span class="skill-tag">Strength of Materials</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── BB-8 DETAIL ── -->
-  <div id="bb8-detail" style="border-top: 1px solid var(--border);">
-    <div class="section">
-      <div class="section-label fade-up">project detail</div>
-      <div class="featured-card fade-up">
-        <div class="fc-top">
-          <div class="fc-gallery">
-            <div class="fc-slides" id="bb8Slides">
-              <img class="fc-slide" src="bb8_build.jpg"   alt="Bruin BB-8 physical build in progress" />
-              <img class="fc-slide" src="bb8_cad.jpg"     alt="BB-8 internal drivetrain CAD assembly" />
-              <img class="fc-slide" src="bb8_sphere.jpg"  alt="BB-8 full sphere CAD render" />
-              <img class="fc-slide" src="bb8_diagram.jpg" alt="BB-8 full assembly diagram with labeled subsystems" />
-            </div>
-            <button class="fc-arrow prev" onclick="bb8Nav(-1)">&#8249;</button>
-            <button class="fc-arrow next" onclick="bb8Nav(1)">&#8250;</button>
-            <div class="fc-dots" id="bb8Dots"></div>
-          </div>
-          <div class="fc-info">
-            <div>
-              <div class="fc-badge"><div class="fc-badge-dot" style="background:var(--accent2);"></div>x1 robotics · sept 2025 – present</div>
-              <h3>Bruin BB-8 — Internal Arm</h3>
-              <div class="fc-org">ASME UCLA — X1 Robotics</div>
-              <p class="fc-desc">
-                Designed an internal articulation arm for a holonomic spherical robot inspired by BB-8 from Star Wars. The robot uses omni-wheels for holonomic movement inside the shell (hamster wheel effect), with a magnetically-attached head actuated by the internal arm. The full assembly integrates a drivetrain, depth-sensing camera, speaker, and NEO motors — all housed within a transparent outer shell.
-              </p>
-              <div class="fc-tags">
-                <span class="fc-tag">SolidWorks</span>
-                <span class="fc-tag">FEA</span>
-                <span class="fc-tag">6061-T6 Al</span>
-                <span class="fc-tag">GD&T</span>
-                <span class="fc-tag">Holonomic Drive</span>
-                <span class="fc-tag">Magnetic Coupling</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fc-bottom">
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Mechanism Design</div>
-            <div class="fc-contrib-title">3-Axis Head Articulation</div>
-            <div class="fc-contrib-desc">Achieved 3-axis head movement at 253mm radial distance. Specified ±0.25mm inner / ±0.75mm outer tolerances for press-fit magnet and dowel-spring preload fastening strategy.</div>
-          </div>
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Structural Validation</div>
-            <div class="fc-contrib-title">FEA — 1.5–2× Factor of Safety</div>
-            <div class="fc-contrib-desc">Performed FEA to validate structural integrity of 6061-T6 aluminum components, confirming 1.5–2× factor of safety on all load-bearing parts prior to manufacturing.</div>
-          </div>
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">System Integration</div>
-            <div class="fc-contrib-title">Holonomic Spherical Drive</div>
-            <div class="fc-contrib-desc">The full assembly integrates omni-wheel drivetrain, magnetically-attached head, depth sensing camera, speaker, and motor electronics — all within a transparent outer shell.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PETALUX DETAIL ── -->
-  <div id="petalux-detail" style="border-top: 1px solid var(--border);">
-    <div class="section">
-      <div class="featured-card fade-up">
-        <div class="fc-top">
-          <div class="fc-gallery">
-            <div class="fc-slides" id="petaluxSlides">
-              <img class="fc-slide" src="petalux_petal.jpg"       alt="Petalux petal mechanism — Fusion 360 simulation showing 20° petal angle" />
-              <img class="fc-slide" src="petalux_components.jpg"  alt="Petalux full assembly, individual components, and physical prototype" />
-            </div>
-            <button class="fc-arrow prev" onclick="petaluxNav(-1)">&#8249;</button>
-            <button class="fc-arrow next" onclick="petaluxNav(1)">&#8250;</button>
-            <div class="fc-dots" id="petaluxDots"></div>
-          </div>
-          <div class="fc-info">
-            <div>
-              <div class="fc-badge"><div class="fc-badge-dot" style="background:var(--accent2);"></div>creative labs · apr 2026 – present</div>
-              <h3>Petalux — Motorized Flower Lamp</h3>
-              <div class="fc-org">UCLA Creative Labs — Project Lead</div>
-              <p class="fc-desc">
-                An interactive lamp with servo-actuated petals that open and close on command. As project lead, coordinated mechanical, electrical, and software subteams. Designed and iterated the petal mechanism in Fusion 360 — including a threaded lead screw shaft, petal bracket, and motor mount — and implemented embedded control via Arduino IDE with mobile map integration.
-              </p>
-              <div class="fc-tags">
-                <span class="fc-tag">Fusion 360</span>
-                <span class="fc-tag">Arduino IDE</span>
-                <span class="fc-tag">Servo Actuation</span>
-                <span class="fc-tag">3D Printing</span>
-                <span class="fc-tag">Embedded Control</span>
-                <span class="fc-tag">Project Lead</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fc-bottom">
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Mechanism Design</div>
-            <div class="fc-contrib-title">Open/Close Petal Linkage</div>
-            <div class="fc-contrib-desc">Designed a threaded lead screw drive system that actuates 8 petals simultaneously through 20° of rotation. Iterated in Fusion 360 with motion studies to validate geometry before printing.</div>
-          </div>
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Manufacturing</div>
-            <div class="fc-contrib-title">FDM 3D Printing</div>
-            <div class="fc-contrib-desc">All structural components 3D printed in PLA. Designed for printability with no support-heavy features, press-fit tolerances for shaft interfaces, and modular subassemblies for easy iteration.</div>
-          </div>
-          <div class="fc-contrib">
-            <div class="fc-contrib-label">Systems Integration</div>
-            <div class="fc-contrib-title">Arduino + Mobile Control</div>
-            <div class="fc-contrib-desc">Coordinated embedded Arduino control with a mobile interface for remote actuation. Managed cross-functional integration between mechanical, electrical, and software subteams.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── ARTWORK ── -->
-  <div id="artwork" style="border-top: 1px solid var(--border);">
-    <div class="section">
-      <div class="section-label fade-up">artwork</div>
-      <div class="artwork-grid fade-up">
-        <div class="art-card">
-          <img src="art_blue.jpg" alt="Blue oil painting — hands holding fabric" />
-        </div>
-        <div class="art-card art-card-tall">
-          <img src="art_clock.jpg" alt="Charcoal drawing — melting clock held by hand" />
-        </div>
-        <div class="art-card">
-          <img src="art_space.jpg" alt="Digital illustration — asteroid with Earth rising" />
         </div>
       </div>
     </div>
@@ -1269,13 +1276,13 @@
       <div class="section-label fade-up">experience</div>
       <div class="exp-grid">
         <div class="fade-up">
-          <p class="exp-col-label">work & research</p>
+          <p class="exp-col-label">work &amp; research</p>
           <div class="tl">
             <div class="tl-item">
               <div class="tl-num">01</div>
               <div class="tl-content">
                 <div class="tl-date">jan 2026 – present</div>
-                <div class="tl-title">Undergraduate Researcher — CAD & Manufacturing</div>
+                <div class="tl-title">Undergraduate Researcher — CAD &amp; Manufacturing</div>
                 <div class="tl-org">UCLA Di Carlo Lab</div>
                 <p class="tl-desc">Designed the toolhead exchange mechanism for a benchtop bioassay robot. Performed CNC milling, lathe, and drilling ops; applied GD&T across 3D-printed and machined stainless steel assemblies.</p>
               </div>
@@ -1295,20 +1302,20 @@
                 <div class="tl-date">sept 2024 – june 2025</div>
                 <div class="tl-title">Mechanical Engineer — Hybrid Rocket</div>
                 <div class="tl-org">UCLA Rocket Project</div>
-                <p class="tl-desc">Designed a 3-section CF body tube layup with ±45°/0° plies. Manufactured laser-cut plywood engine centering rings epoxied into structural laminations for thrust-alignment and bending margin.</p>
+                <p class="tl-desc">Designed a 3-section CF body tube layup with ±45°/0° plies. Manufactured laser-cut plywood engine centering rings epoxied into structural laminations.</p>
               </div>
             </div>
           </div>
         </div>
         <div class="fade-up">
-          <p class="exp-col-label">leadership & clubs</p>
+          <p class="exp-col-label">leadership &amp; clubs</p>
           <div class="tl">
             <div class="tl-item">
               <div class="tl-num">01</div>
               <div class="tl-content">
                 <div class="tl-date">sept 2025 – present</div>
                 <div class="tl-title">Mechanical Engineer — Bruin BB-8</div>
-                <div class="tl-org tl-org-sage">ASME UCLA</div>
+                <div class="tl-org tl-org-sage">ASME UCLA · X1 Robotics</div>
                 <p class="tl-desc">Designing internal arm for a holonomic spherical robot: 3-axis articulation at 253mm radial distance, SolidWorks modeling, FEA sign-off, and tolerance analysis before manufacturing.</p>
               </div>
             </div>
@@ -1318,7 +1325,7 @@
                 <div class="tl-date">ongoing</div>
                 <div class="tl-title">Member</div>
                 <div class="tl-org tl-org-gold">Theta Tau · X1 Robotics · PIE · PCN</div>
-                <p class="tl-desc">Active in Theta Tau (engineering professional fraternity), X1 Robotics, Pilipinos in Engineering, and Pilipino Cultural Night — engineering community and cultural outreach.</p>
+                <p class="tl-desc">Active in Theta Tau (engineering professional fraternity), X1 Robotics, Pilipinos in Engineering, and Pilipino Cultural Night.</p>
               </div>
             </div>
           </div>
@@ -1327,29 +1334,34 @@
     </div>
   </div>
 
+  <!-- ── ARTWORK ── -->
+  <div id="artwork">
+    <div class="section">
+      <div class="section-label fade-up">artwork</div>
+      <div class="artwork-grid fade-up">
+        <div class="art-card"><img src="art_blue.jpg"  alt="Blue oil painting — hands holding fabric" /></div>
+        <div class="art-card"><img src="art_clock.jpg" alt="Charcoal — melting clock held by hand" /></div>
+        <div class="art-card"><img src="art_space.jpg" alt="Digital — asteroid with Earth rising" /></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── CONTACT ── -->
   <div id="contact">
     <div class="contact-section">
-      <h2 class="contact-heading fade-up">
-        let's build<br>
-        something <em>real.</em>
-      </h2>
+      <h2 class="contact-heading fade-up">let's build<br>something <em>real.</em></h2>
       <div class="contact-links fade-up">
         <a href="mailto:jeremylldeleon@gmail.com" class="cl">
-          <span>jeremylldeleon@gmail.com</span>
-          <span class="cl-arrow">→</span>
+          <span>jeremylldeleon@gmail.com</span><span class="cl-arrow">→</span>
         </a>
         <a href="https://linkedin.com/in/jeremy-de-leon" target="_blank" class="cl">
-          <span>linkedin.com/in/jeremy-de-leon</span>
-          <span class="cl-arrow">→</span>
+          <span>linkedin.com/in/jeremy-de-leon</span><span class="cl-arrow">→</span>
         </a>
         <a href="https://github.com/jeremydeleon" target="_blank" class="cl">
-          <span>github.com/jeremydeleon</span>
-          <span class="cl-arrow">→</span>
+          <span>github.com/jeremydeleon</span><span class="cl-arrow">→</span>
         </a>
         <a href="JeremyDeLeon_Resume.pdf" target="_blank" class="cl">
-          <span>download resume ↓</span>
-          <span class="cl-arrow">→</span>
+          <span>download resume ↓</span><span class="cl-arrow">→</span>
         </a>
       </div>
     </div>
@@ -1361,41 +1373,31 @@
   </footer>
 
   <script>
-    // ── Custom cursor
+    // ── Cursor
     const cursor = document.getElementById('cursor');
-    let mx = 0, my = 0;
-
     document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top  = my + 'px';
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
     });
-
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
     });
 
-    // ── Project row preview
+    // ── Cursor image preview on project rows
     const preview = document.getElementById('projPreview');
     const previewInner = document.getElementById('projPreviewInner');
-
     document.querySelectorAll('.proj-row[data-preview]').forEach(row => {
       const src = row.getAttribute('data-preview');
-
       row.addEventListener('mouseenter', () => {
-        previewInner.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover;display:block;" />`;
+        previewInner.innerHTML = `<img src="${src}" />`;
         preview.classList.add('visible');
       });
-
       row.addEventListener('mousemove', e => {
         preview.style.left = (e.clientX + 24) + 'px';
         preview.style.top  = (e.clientY - 80) + 'px';
       });
-
-      row.addEventListener('mouseleave', () => {
-        preview.classList.remove('visible');
-      });
+      row.addEventListener('mouseleave', () => preview.classList.remove('visible'));
     });
 
     // ── Scroll fade
@@ -1403,70 +1405,50 @@
       entries.forEach((e, i) => {
         if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
       });
-    }, { threshold: 0.08 });
+    }, { threshold: 0.06 });
     document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-    // ── Gallery
-    let cur = 0;
-    const total = 5;
-    const slides = document.getElementById('gallerySlides');
-    const dotsEl = document.getElementById('galleryDots');
+    // ── Universal carousel engine
+    const carousels = {};
 
-    for (let i = 0; i < total; i++) {
-      const d = document.createElement('button');
-      d.className = 'fc-dot' + (i === 0 ? ' active' : '');
-      d.onclick = () => goTo(i);
-      dotsEl.appendChild(d);
-    }
-
-    function goTo(n) {
-      cur = (n + total) % total;
-      slides.style.transform = `translateX(-${cur * 100}%)`;
-      document.querySelectorAll('.fc-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
-    }
-
-    function galleryNav(dir) { goTo(cur + dir); }
-    setInterval(() => galleryNav(1), 4500);
-
-    // BB-8 gallery
-    let bb8Cur = 0, bb8Total = 4;
-    const bb8Slides = document.getElementById('bb8Slides');
-    const bb8DotsEl = document.getElementById('bb8Dots');
-    if (bb8DotsEl) {
-      for (let i = 0; i < bb8Total; i++) {
+    function initCarousel(id, count) {
+      carousels[id] = { cur: 0, total: count };
+      const dotsEl = document.getElementById('dots-' + id);
+      if (!dotsEl) return;
+      for (let i = 0; i < count; i++) {
         const d = document.createElement('button');
-        d.className = 'fc-dot' + (i === 0 ? ' active' : '');
-        d.onclick = () => goToBB8(i);
-        bb8DotsEl.appendChild(d);
+        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i+1));
+        d.onclick = () => carGoTo(id, i);
+        dotsEl.appendChild(d);
       }
     }
-    function goToBB8(n) {
-      bb8Cur = (n + bb8Total) % bb8Total;
-      if (bb8Slides) bb8Slides.style.transform = `translateX(-${bb8Cur * 100}%)`;
-      document.querySelectorAll('#bb8Dots .fc-dot').forEach((d, i) => d.classList.toggle('active', i === bb8Cur));
-    }
-    function bb8Nav(dir) { goToBB8(bb8Cur + dir); }
-    setInterval(() => bb8Nav(1), 5000);
 
-    // Petalux gallery
-    let plxCur = 0, plxTotal = 2;
-    const plxSlides = document.getElementById('petaluxSlides');
-    const plxDotsEl = document.getElementById('petaluxDots');
-    if (plxDotsEl) {
-      for (let i = 0; i < plxTotal; i++) {
-        const d = document.createElement('button');
-        d.className = 'fc-dot' + (i === 0 ? ' active' : '');
-        d.onclick = () => goToPlx(i);
-        plxDotsEl.appendChild(d);
-      }
+    function carGoTo(id, n) {
+      const c = carousels[id];
+      if (!c) return;
+      c.cur = (n + c.total) % c.total;
+      const track = document.getElementById('track-' + id);
+      if (track) track.style.transform = `translateX(-${c.cur * 100}%)`;
+      document.querySelectorAll('#dots-' + id + ' .carousel-dot')
+        .forEach((d, i) => d.classList.toggle('active', i === c.cur));
     }
-    function goToPlx(n) {
-      plxCur = (n + plxTotal) % plxTotal;
-      if (plxSlides) plxSlides.style.transform = `translateX(-${plxCur * 100}%)`;
-      document.querySelectorAll('#petaluxDots .fc-dot').forEach((d, i) => d.classList.toggle('active', i === plxCur));
-    }
-    function petaluxNav(dir) { goToPlx(plxCur + dir); }
-    setInterval(() => petaluxNav(1), 5500);
+
+    function carNav(id, dir) { carGoTo(id, (carousels[id]?.cur || 0) + dir); }
+
+    // Init all carousels — count = number of slides
+    initCarousel('dicarlo', 5);
+    initCarousel('bb8',     4);
+    initCarousel('petalux', 2);
+    initCarousel('rocket',  1);
+    initCarousel('bionic',  1);
+    initCarousel('ant',     1);
+    initCarousel('pill',    1);
+
+    // Auto-advance multi-slide carousels
+    setInterval(() => carNav('dicarlo', 1), 4500);
+    setInterval(() => carNav('bb8',     1), 5000);
+    setInterval(() => carNav('petalux', 1), 5500);
   </script>
 </body>
 </html>
