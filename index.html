@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -279,7 +279,7 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       gap: 2rem;
     }
     .proj-meta-left { display: flex; align-items: baseline; gap: 1.25rem; }
@@ -289,7 +289,7 @@
       letter-spacing: 0.08em;
     }
     .proj-section-title {
-      font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
       font-weight: 300;
       letter-spacing: -0.025em;
       color: var(--white);
@@ -301,13 +301,20 @@
       color: var(--accent2);
     }
 
+    /* Side-by-side: carousel left, info right */
+    .proj-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
     /* Carousel */
     .carousel-wrap {
       position: relative;
       overflow: hidden;
       border-radius: 4px;
-      background: #1a1a1a;
-      margin-bottom: 0;
+      background: #161616;
     }
     .carousel-track {
       display: flex;
@@ -315,14 +322,16 @@
     }
     .carousel-slide {
       min-width: 100%;
-      height: 520px;
-      object-fit: cover;
+      height: 360px;
+      object-fit: contain;
+      object-position: center;
       display: block;
       flex-shrink: 0;
+      background: #161616;
     }
     .carousel-slide-placeholder {
       min-width: 100%;
-      height: 520px;
+      height: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -334,16 +343,16 @@
       text-transform: uppercase;
     }
 
-    /* CAD/render slides: dark bg, contain so nothing is cropped */
+    /* CAD/render slides: same as regular now (all use contain) */
     .carousel-slide-contain {
       min-width: 100%;
-      height: 520px;
+      height: 360px;
       object-fit: contain;
       object-position: center;
       display: block;
       flex-shrink: 0;
-      background: #181818;
-      padding: 2rem;
+      background: #161616;
+      padding: 1.5rem;
     }
 
     /* Carousel controls */
@@ -351,7 +360,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 1.25rem;
+      margin-top: 0.85rem;
     }
     .carousel-dots { display: flex; gap: 6px; }
     .carousel-dot {
@@ -366,26 +375,24 @@
       background: transparent;
       border: 1px solid var(--border2);
       color: var(--dim);
-      width: 36px; height: 36px;
+      width: 32px; height: 32px;
       border-radius: 2px;
       cursor: none;
-      font-size: 16px;
+      font-size: 15px;
       display: flex; align-items: center; justify-content: center;
       transition: border-color 0.2s, color 0.2s;
     }
     .carousel-arrow:hover { border-color: var(--white); color: var(--white); }
 
-    /* Description + tags below carousel */
-    .proj-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-top: 2.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--border);
+    /* Info panel (right side) */
+    .proj-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-top: 0.25rem;
     }
     .proj-desc {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--dim);
       line-height: 1.8;
     }
@@ -397,7 +404,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent2);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
     .badge-dot {
       width: 6px; height: 6px; border-radius: 50%;
@@ -410,17 +417,15 @@
     }
     .proj-desc p { margin-bottom: 0; }
 
-    .proj-sidebar {}
     .proj-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      margin-bottom: 1.5rem;
     }
     .proj-tag {
       font-size: 11px;
       letter-spacing: 0.06em;
-      padding: 0.25rem 0.7rem;
+      padding: 0.2rem 0.6rem;
       border: 1px solid var(--border2);
       color: var(--dim);
       border-radius: 2px;
@@ -434,7 +439,7 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 0.8rem 0;
+      padding: 0.7rem 0;
       border-bottom: 1px solid var(--border);
       gap: 1rem;
       font-size: 13px;
@@ -446,7 +451,7 @@
       color: var(--dimmer);
       flex-shrink: 0;
     }
-    .proj-detail-val { color: var(--dim); text-align: right; }
+    .proj-detail-val { color: var(--dim); text-align: right; font-size: 13px; }
 
     /* ── ABOUT ── */
     #about { border-top: 1px solid var(--border); }
@@ -636,10 +641,8 @@
       .hero-tagline-text { border-left: none; padding-left: 0; border-top: 1px solid var(--border2); padding-top: 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-portrait { position: static; aspect-ratio: 4/3; max-height: 300px; }
-      .skills-list { grid-template-columns: 1fr 1fr; }
-      .exp-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .proj-body { grid-template-columns: 1fr; gap: 2rem; }
-      .carousel-slide, .carousel-slide-placeholder, .carousel-slide-contain { height: 260px; }
+      .proj-layout { grid-template-columns: 1fr; }
+      .carousel-slide, .carousel-slide-placeholder, .carousel-slide-contain { height: 240px; }
       .carousel-slide-contain { padding: 1rem; }
       .artwork-grid { grid-template-columns: 1fr; }
       body { cursor: auto; }
@@ -797,7 +800,7 @@
           </p>
         </div>
         <div class="about-portrait fade-up">
-          <img src="jeremy_portrait.jpeg" alt="Jeremy De Leon at UCLA" />
+          <img src="jeremy_portrait.jpeg" alt="Jeremy De Leon" />
         </div>
         <div class="about-details fade-up">
           <div class="detail-row">
@@ -844,29 +847,30 @@
         <span class="proj-section-type">Research · Di Carlo Lab</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-dicarlo">
-          <img class="carousel-slide" src="dicarlo_machining.gif" alt="CNC machining in action" />
-          <img class="carousel-slide-contain" src="dicarlo_cad_nobg.png" alt="Exploded CAD — toolhead exchange mechanism" />
-          <img class="carousel-slide" src="dicarlo_part_crop.jpeg"  alt="CNC-machined aluminum flanged housing" />
-          <img class="carousel-slide" src="dicarlo_tools_crop.jpeg" alt="12-tool setup on Haas Mini Mill" />
-          <img class="carousel-slide" src="dicarlo_cnc_crop.jpeg"   alt="Haas Mini Mill — UCLA machine shop" />
+      <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-dicarlo">
+              <img class="carousel-slide" src="dicarlo_machining.gif" alt="CNC machining in action" />
+              <img class="carousel-slide-contain" src="dicarlo_cad_nobg.png" alt="Exploded CAD — toolhead exchange mechanism" />
+              <img class="carousel-slide" src="slide_part.jpeg"  alt="CNC-machined aluminum flanged housing" />
+              <img class="carousel-slide" src="slide_tools.jpeg" alt="12-tool setup on Haas Mini Mill" />
+              <img class="carousel-slide" src="slide_cnc.jpeg"   alt="Haas Mini Mill — UCLA machine shop" />
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-dicarlo"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('dicarlo',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('dicarlo', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-dicarlo"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('dicarlo',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('dicarlo', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge"><div class="badge-dot"></div>live research · jan 2026 – present</div>
-          <p>Designed and manufactured a modular toolhead exchange system for a benchtop bioassay robot integrating LLM-driven automation — miniaturizing and automating full microfluidic workflows. All structural components were machined in-house on Haas CNC mills and lathes from 6061-T6 aluminum and stainless steel.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge"><div class="badge-dot"></div>live research · jan 2026 – present</div>
+            <p>Designed and manufactured a modular toolhead exchange system for a benchtop bioassay robot integrating LLM-driven automation — miniaturizing and automating full microfluidic workflows. All structural components were machined in-house on Haas CNC mills and lathes from 6061-T6 aluminum and stainless steel.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">Fusion 360</span>
             <span class="proj-tag">GD&amp;T</span>
@@ -906,28 +910,29 @@
         <span class="proj-section-type">Robotics · X1 Robotics / ASME</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-bb8">
-          <img class="carousel-slide" src="bb8_build.jpg"   alt="Bruin BB-8 physical build" />
-          <img class="carousel-slide" src="bb8_cad.jpg"     alt="BB-8 internal drivetrain CAD" />
-          <img class="carousel-slide" src="bb8_sphere.jpg"  alt="BB-8 full sphere CAD render" />
-          <img class="carousel-slide" src="bb8_diagram.jpg" alt="BB-8 full assembly diagram" />
+            <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-bb8">
+              <img class="carousel-slide" src="bb8_build.jpg" alt="Bruin BB-8 physical build" />
+              <img class="carousel-slide-contain" src="bb8_cad.jpg" alt="BB-8 internal drivetrain CAD" />
+              <img class="carousel-slide-contain" src="bb8_sphere.jpg" alt="BB-8 full sphere CAD render" />
+              <img class="carousel-slide-contain" src="bb8_diagram.jpg" alt="BB-8 full assembly diagram" />
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-bb8"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('bb8',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('bb8', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-bb8"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('bb8',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('bb8', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge"><div class="badge-dot"></div>sept 2025 – present</div>
-          <p>Designed an internal articulation arm for a holonomic spherical robot inspired by BB-8. The robot uses omni-wheels for holonomic movement inside the shell, with a magnetically-attached head actuated by the internal arm. Validated structural integrity of 6061-T6 aluminum components via FEA with a 1.5–2× factor of safety before manufacturing.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge">sept 2025 – present</div>
+            <p>Designed an internal articulation arm for a holonomic spherical robot inspired by BB-8. The robot uses omni-wheels for holonomic movement inside the shell, with a magnetically-attached head actuated by the internal arm. Validated structural integrity of 6061-T6 aluminum components via FEA with a 1.5–2× factor of safety before manufacturing.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">SolidWorks</span>
             <span class="proj-tag">FEA</span>
@@ -952,8 +957,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- ── 3. PETALUX ── -->
   <div id="proj-petalux" class="proj-section">
@@ -966,26 +969,27 @@
         <span class="proj-section-type">Mechatronics · Creative Labs</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-petalux">
-          <img class="carousel-slide" src="petalux_petal.jpg"      alt="Petalux petal mechanism — Fusion 360, 20° petal angle" />
-          <img class="carousel-slide" src="petalux_components.jpg" alt="Petalux full assembly, components, and physical prototype" />
+            <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-petalux">
+              <img class="carousel-slide-contain" src="petalux_petal.jpg" alt="Petalux petal mechanism — Fusion 360, 20° petal angle" />
+              <img class="carousel-slide" src="petalux_components.jpg" alt="Petalux full assembly, components, and physical prototype" />
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-petalux"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('petalux',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('petalux', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-petalux"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('petalux',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('petalux', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge"><div class="badge-dot"></div>apr 2026 – present</div>
-          <p>An interactive lamp with servo-actuated petals that open and close on command. As project lead, coordinated mechanical, electrical, and software subteams. Designed and iterated the petal linkage mechanism in Fusion 360 — including a threaded lead screw, petal bracket, and motor mount — and oversaw embedded Arduino control with mobile map integration.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge">apr 2026 – present</div>
+            <p>An interactive lamp with servo-actuated petals that open and close on command. As project lead, coordinated mechanical, electrical, and software subteams. Designed and iterated the petal linkage mechanism in Fusion 360 — including a threaded lead screw, petal bracket, and motor mount — and oversaw embedded Arduino control with mobile map integration.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">Fusion 360</span>
             <span class="proj-tag">Arduino IDE</span>
@@ -1009,8 +1013,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- ── 4. HYBRID ROCKET ── -->
   <div id="proj-rocket" class="proj-section">
@@ -1023,25 +1025,26 @@
         <span class="proj-section-type">Aerospace · Rocket Project</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-rocket">
-          <div class="carousel-slide-placeholder">photos coming soon</div>
+            <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-rocket">
+              <div class="carousel-slide-placeholder">photos coming soon</div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-rocket"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('rocket',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('rocket', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-rocket"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('rocket',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('rocket', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge">sept 2024 – june 2025</div>
-          <p>Designed a 3-section carbon fiber body tube layup with ±45°/0° plies and reinforced bolted-joint regions. Manufactured plywood engine centering rings via laser-cut ¼" laminations epoxied into ½" structural rings — achieving strong buckling, bending, and thrust-alignment margins for the hybrid rocket airframe.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge">sept 2024 – june 2025</div>
+            <p>Designed a 3-section carbon fiber body tube layup with ±45°/0° plies and reinforced bolted-joint regions. Manufactured plywood engine centering rings via laser-cut ¼" laminations epoxied into ½" structural rings — achieving strong buckling, bending, and thrust-alignment margins for the hybrid rocket airframe.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">Carbon Fiber</span>
             <span class="proj-tag">Composite Layup</span>
@@ -1065,8 +1068,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- ── 5. BIONIC HAND ── -->
   <div id="proj-bionic" class="proj-section">
@@ -1079,25 +1080,26 @@
         <span class="proj-section-type">Assistive Tech · Design</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-bionic">
-          <div class="carousel-slide-placeholder">photos coming soon</div>
+            <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-bionic">
+              <div class="carousel-slide-placeholder">photos coming soon</div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-bionic"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('bionic',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('bionic', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-bionic"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('bionic',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('bionic', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge">2024</div>
-          <p>Led the mechanical design of a bionic hand prototype in Onshape. Designed multi-part assemblies for finger actuation and supported Arduino-based servo control integration for a functional assistive-device demonstration.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge">2024</div>
+            <p>Led the mechanical design of a bionic hand prototype in Onshape. Designed multi-part assemblies for finger actuation and supported Arduino-based servo control integration for a functional assistive-device demonstration.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">Onshape</span>
             <span class="proj-tag">Arduino IDE</span>
@@ -1116,8 +1118,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- ── 6. ANT COLONY ── -->
   <div id="proj-ant" class="proj-section">
@@ -1130,25 +1130,26 @@
         <span class="proj-section-type">MATLAB · Simulation</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-ant">
-          <div class="carousel-slide-placeholder">screenshots coming soon</div>
+            <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-ant">
+              <div class="carousel-slide-placeholder">screenshots coming soon</div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-ant"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('ant',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('ant', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-ant"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('ant',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('ant', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge">2024</div>
-          <p>Built a probabilistic multi-agent simulation in MATLAB across 8 modular functions. Implemented concentration-weighted pheromone gradient steering, stochastic angle updates drawn from N(0,σ), and linear pheromone decay to produce emergent shortest-path discovery across the agent population.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge">2024</div>
+            <p>Built a probabilistic multi-agent simulation in MATLAB across 8 modular functions. Implemented concentration-weighted pheromone gradient steering, stochastic angle updates drawn from N(0,σ), and linear pheromone decay to produce emergent shortest-path discovery across the agent population.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">MATLAB</span>
             <span class="proj-tag">Multi-Agent Sim</span>
@@ -1167,8 +1168,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- ── 7. PILL DISPENSER ── -->
   <div id="proj-pill" class="proj-section">
@@ -1181,25 +1180,26 @@
         <span class="proj-section-type">SolidWorks · DFM</span>
       </div>
 
-      <div class="carousel-wrap fade-up">
-        <div class="carousel-track" id="track-pill">
-          <div class="carousel-slide-placeholder">renders coming soon</div>
+            <div class="proj-layout fade-up">
+        <div>
+          <div class="carousel-wrap">
+            <div class="carousel-track" id="track-pill">
+              <div class="carousel-slide-placeholder">renders coming soon</div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="dots-pill"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-arrow" onclick="carNav('pill',-1)">&#8249;</button>
+              <button class="carousel-arrow" onclick="carNav('pill', 1)">&#8250;</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="carousel-controls fade-up">
-        <div class="carousel-dots" id="dots-pill"></div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" onclick="carNav('pill',-1)">&#8249;</button>
-          <button class="carousel-arrow" onclick="carNav('pill', 1)">&#8250;</button>
-        </div>
-      </div>
-
-      <div class="proj-body fade-up">
-        <div class="proj-desc">
-          <div class="proj-desc-badge">2024</div>
-          <p>Designed a 15-part SolidWorks assembly for a dual-hopper pill dispenser in PLA. Applied DFM constraints across variable pill geometries, delivering a compact 22.5×7.5cm footprint optimized for 3D printability with no support-heavy features.</p>
-        </div>
-        <div class="proj-sidebar">
+        <div class="proj-info">
+          <div class="proj-desc">
+            <div class="proj-desc-badge">2024</div>
+            <p>Designed a 15-part SolidWorks assembly for a dual-hopper pill dispenser in PLA. Applied DFM constraints across variable pill geometries, delivering a compact 22.5×7.5cm footprint optimized for 3D printability with no support-heavy features.</p>
+          </div>
           <div class="proj-tags">
             <span class="proj-tag">SolidWorks</span>
             <span class="proj-tag">DFM</span>
@@ -1222,8 +1222,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
   <!-- ── SKILLS ── -->
   <div id="skills" style="border-top: 1px solid var(--border);">
