@@ -309,38 +309,49 @@
       align-items: start;
     }
 
-    /* Left column must declare min-width:0 so grid child doesn't overflow */
+    /* Left column: must be constrained so carousel never bleeds */
     .proj-layout > div:first-child {
       min-width: 0;
-      width: 100%;
+      overflow: hidden;
     }
 
-    /* Carousel */
+    /* Carousel outer shell — sets height via aspect-ratio so it's always correct */
     .carousel-wrap {
       position: relative;
-      overflow: hidden;
       border-radius: 4px;
       background: #161616;
       width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;   /* the one true clip boundary */
     }
+
+    /* Track: absolutely fills the wrap, slides laid out horizontally */
     .carousel-track {
+      position: absolute;
+      inset: 0;
       display: flex;
-      width: 100%;
+      /* width set by JS to total-slides × 100% */
+      height: 100%;
       transition: transform 0.6s cubic-bezier(0.76,0,0.24,1);
     }
-    .carousel-slide {
-      width: 100%;
-      flex: 0 0 100%;
-      height: 360px;
-      object-fit: contain;
-      object-position: center;
+
+    /* Every slide: fills exactly one "slot" in the track */
+    .carousel-slide,
+    .carousel-slide-contain,
+    .carousel-slide-placeholder {
+      flex: 0 0 auto;   /* JS sets explicit pixel width */
+      height: 100%;
       display: block;
       background: #161616;
+      object-fit: contain;
+      object-position: center;
     }
+
+    .carousel-slide-contain {
+      padding: 1.25rem;
+    }
+
     .carousel-slide-placeholder {
-      width: 100%;
-      flex: 0 0 100%;
-      height: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -349,18 +360,6 @@
       font-size: 13px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-    }
-
-    /* CAD/render slides */
-    .carousel-slide-contain {
-      width: 100%;
-      flex: 0 0 100%;
-      height: 360px;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-      background: #161616;
-      padding: 1.5rem;
     }
 
     /* Carousel controls */
@@ -650,7 +649,6 @@
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-portrait { position: static; aspect-ratio: 4/3; max-height: 300px; }
       .proj-layout { grid-template-columns: 1fr; }
-      .carousel-slide, .carousel-slide-placeholder, .carousel-slide-contain { height: 240px; }
       .carousel-slide-contain { padding: 0.75rem; }
       .artwork-grid { grid-template-columns: 1fr; }
       body { cursor: auto; }
@@ -1414,19 +1412,45 @@
     }, { threshold: 0.06 });
     document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-    // ── Universal carousel engine
+    // ── Universal carousel engine (pixel-based — immune to % overflow issues)
     const carousels = {};
 
     function initCarousel(id, count) {
-      carousels[id] = { cur: 0, total: count };
+      const wrap  = document.querySelector(`#proj-${id} .carousel-wrap`);
+      const track = document.getElementById('track-' + id);
       const dotsEl = document.getElementById('dots-' + id);
-      if (!dotsEl) return;
-      for (let i = 0; i < count; i++) {
-        const d = document.createElement('button');
-        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        d.setAttribute('aria-label', 'Slide ' + (i+1));
-        d.onclick = () => carGoTo(id, i);
-        dotsEl.appendChild(d);
+      if (!wrap || !track) return;
+
+      carousels[id] = { cur: 0, total: count, wrap, track };
+
+      // Size all slides to exactly the wrap's pixel width
+      function resize() {
+        const w = wrap.getBoundingClientRect().width;
+        track.style.width = (w * count) + 'px';
+        track.querySelectorAll(
+          '.carousel-slide, .carousel-slide-contain, .carousel-slide-placeholder'
+        ).forEach(s => { s.style.width = w + 'px'; });
+        // Re-apply current offset in pixels
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${carousels[id].cur * w}px)`;
+        requestAnimationFrame(() => {
+          track.style.transition = 'transform 0.6s cubic-bezier(0.76,0,0.24,1)';
+        });
+      }
+
+      const ro = new ResizeObserver(resize);
+      ro.observe(wrap);
+      resize(); // initial
+
+      // Dots
+      if (dotsEl) {
+        for (let i = 0; i < count; i++) {
+          const d = document.createElement('button');
+          d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          d.setAttribute('aria-label', 'Slide ' + (i + 1));
+          d.onclick = () => carGoTo(id, i);
+          dotsEl.appendChild(d);
+        }
       }
     }
 
@@ -1434,15 +1458,15 @@
       const c = carousels[id];
       if (!c) return;
       c.cur = (n + c.total) % c.total;
-      const track = document.getElementById('track-' + id);
-      if (track) track.style.transform = `translateX(-${c.cur * 100}%)`;
+      const w = c.wrap.getBoundingClientRect().width;
+      c.track.style.transform = `translateX(-${c.cur * w}px)`;
       document.querySelectorAll('#dots-' + id + ' .carousel-dot')
         .forEach((d, i) => d.classList.toggle('active', i === c.cur));
     }
 
     function carNav(id, dir) { carGoTo(id, (carousels[id]?.cur || 0) + dir); }
 
-    // Init all carousels — count = number of slides
+    // Init all carousels
     initCarousel('dicarlo', 5);
     initCarousel('bb8',     4);
     initCarousel('petalux', 2);
